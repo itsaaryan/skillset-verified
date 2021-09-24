@@ -1,0 +1,106 @@
+.create-user {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  -webkit-transform: translate(-50%, -50%);
+  -moz-transform: translate(-50%, -50%);
+  -o-transform: translate(-50%, -50%);
+  -ms-transform: translate(-50%, -50%);
+}
+
+.card-style {
+  background: #1e2022ea !important;
+  border-radius: 20px !important;
+  color: #c5c6c7 !important;
+  min-width: 360px;
+  border: 1px solid #45a29e !important;
+  box-shadow: 2px 0px 5px 1px #45a29e !important;
+}
+
+.card-heading {
+  font-family: "Grand Hotel", cursive !important;
+  color: #66fcf1;
+  font-size: 35px;
+  font-weight: 500;
+  width: 100%;
+  text-align: center;
+}
+
+.horizontal-line {
+  border: none;
+  border-top: 2px solid #45a29e;
+}
+
+.form-inputs > input {
+  border-radius: 20px !important;
+  background: #1e2022ea !important;
+  border: 1px solid #45a29a !important;
+  box-shadow: 2px 0px 3px 1px #45a29e !important;
+  color: #66fcf1 !important;
+}
+
+.form-inputs > input::placeholder {
+  color: #66fcf1 !important;
+}
+
+.form-inputs > input::selection {
+  color: #66fcf1 !important;
+}
+
+.form-inputs > input:focus {
+  box-shadow: 3px 0px 9px 0px #45a29e !important;
+}
+
+.ui.selection.dropdown {
+  border-radius: 20px !important;
+  background: #1e2022ea !important;
+  box-shadow: 2px 0px 3px 1px #45a29e !important;
+  color: #66fcf1 !important;
+}
+
+.ui.default.dropdown:not(.button) > .text,
+.ui.dropdown:not(.button) > .default.text {
+  color: #66fcf1 !important;
+}
+
+.ui.selection.active.dropdown .menu {
+  background: #1e2022ea !important;
+  color: #66fcf1 !important;
+  border-bottom-left-radius: 20px !important;
+  border-bottom-right-radius: 20px !important;
+  box-shadow: 2px 0px 3px 1px #45a29e !important;
+}
+
+.ui.selection.dropdown .menu > .item {
+  color: #66fcf1 !important;
+  border-top: 1px solid #45a29a !important;
+}
+
+.ui.dropdown .menu .selected.item,
+.ui.dropdown.selected {
+  color: #1e2022ea !important;
+  background: #45a29e !important;
+}
+
+.ui.selection.visible.dropdown > .text:not(.default) {
+  color: #66fcf1 !important;
+}
+
+.button-holder {
+  text-align: center;
+}
+
+.button-css {
+  border-radius: 20px !important;
+  color: #66fcf1 !important;
+  background: #1e2022ea !important;
+  border: 2px solid #45a29a !important;
+  box-shadow: 1px 0px 5px 0px #45a29a !important;
+  text-align: center;
+}
+
+.button-css:hover {
+  background: #66fcf1 !important;
+  color: #1e2022ea !important;
+}
