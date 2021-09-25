@@ -23,10 +23,7 @@ contract OrganizationEndorser {
   }
 
   modifier onlyOrganization() {
-    require(
-      Admin(admin).isOrganizationEndorser(msg.sender),
-      "Only Organization can access the this function!"
-    );
+    require(Admin(admin).isOrganizationEndorser(msg.sender));
     _;
   }
 

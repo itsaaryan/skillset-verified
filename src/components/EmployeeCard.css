@@ -1,0 +1,68 @@
+.employee-card {
+  width: 70% !important;
+  margin-left: auto !important;
+  margin-right: auto !important;
+  background: #393b3fa6 !important;
+  border-radius: 20px !important;
+  border: 1px solid #45a29a !important;
+  box-shadow: 2px 0px 3px 1px #45a29e !important;
+  color: #66fcf1 !important;
+}
+
+.employee-card > .content > .header {
+  display: flex !important;
+  justify-content: space-between !important;
+  flex-wrap: wrap !important;
+  color: #66fcf1 !important;
+}
+
+.employee-card > .content > .header > small {
+  font-size: 12px !important;
+  font-weight: 600 !important;
+  font-style: italic;
+}
+
+@media only screen and (max-width: 800px) {
+  .employee-card {
+    width: 100% !important;
+  }
+}
+
+.skill-design {
+  width: fit-content;
+  border-radius: 30px;
+  padding: 3px;
+  padding-left: 12px;
+  padding-right: 12px;
+  margin: 5px;
+}
+
+.skill-holder {
+  display: flex;
+  flex-wrap: wrap;
+  justify-items: flex-start;
+}
+
+.readopenclose {
+  color: #c5c6c7;
+  float: right;
+  cursor: pointer;
+}
+
+.certification-design {
+  display: flex;
+  justify-content: space-between;
+  margin: 10px;
+}
+
+.education-design {
+  display: flex;
+  justify-content: space-between;
+  margin: 10px;
+}
+
+.workexp-design {
+  display: flex;
+  justify-content: space-between;
+  margin: 10px;
+}

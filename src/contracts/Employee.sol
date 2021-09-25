@@ -25,10 +25,7 @@ contract Employee {
   }
 
   modifier OnlyEmployee() {
-    require(
-      msg.sender == employee_address,
-      "Sorry, Only employee owning this contract can access it!!"
-    );
+    require(msg.sender == employee_address);
     _;
   }
 
@@ -89,10 +86,7 @@ contract Employee {
   function endorseSkill(string memory _name, uint256 _overall_percentage)
     public
   {
-    require(
-      Admin(admin).isOrganizationEndorser(msg.sender),
-      "Sorry, Only and endorser can endorse skills!"
-    );
+    require(Admin(admin).isOrganizationEndorser(msg.sender));
     skillmap[_name].overall_percentage = _overall_percentage;
     overallEndorsement += _overall_percentage;
     endorsecount = endorsecount + 1;
@@ -179,14 +173,8 @@ contract Employee {
   }
 
   function endorseCertification(string memory _name) public {
-    require(
-      Admin(admin).isOrganizationEndorser(msg.sender),
-      "Sorry, Only and endorser can endorse certification!"
-    );
-    require(
-      msg.sender == certificationmap[_name].organization,
-      "Not from same organiation!"
-    );
+    require(Admin(admin).isOrganizationEndorser(msg.sender));
+    require(msg.sender == certificationmap[_name].organization);
     certificationmap[_name].endorsed = true;
     emit certificationVerified(employee_address, msg.sender);
   }
@@ -264,14 +252,8 @@ contract Employee {
   }
 
   function endorseWorkExp() public {
-    require(
-      Admin(admin).isOrganizationEndorser(msg.sender),
-      "Sorry, Only and endorser can endorse certification!"
-    );
-    require(
-      workexpmap[msg.sender].organization != address(0x0),
-      "Organization does not exist in experience!"
-    );
+    require(Admin(admin).isOrganizationEndorser(msg.sender));
+    require(workexpmap[msg.sender].organization != address(0x0));
     workexpmap[msg.sender].endorsed = true;
     emit workexpEndorsed(employee_address, msg.sender);
   }
@@ -352,14 +334,8 @@ contract Employee {
   }
 
   function endorseEducation() public {
-    require(
-      Admin(admin).isOrganizationEndorser(msg.sender),
-      "Sorry, Only and endorser can endorse certification!"
-    );
-    require(
-      educationmap[msg.sender].institute != address(0x0),
-      "Organization does not exist in experience!"
-    );
+    require(Admin(admin).isOrganizationEndorser(msg.sender));
+    require(educationmap[msg.sender].institute != address(0x0));
     educationmap[msg.sender].endorsed = true;
     emit educationEndorsed(employee_address, msg.sender);
   }

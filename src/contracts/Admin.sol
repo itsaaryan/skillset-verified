@@ -10,7 +10,7 @@ contract Admin {
   }
 
   modifier onlyOwner() {
-    require(msg.sender == owner, "sorry!,Ony owner is allowed to visit!");
+    require(msg.sender == owner);
     _;
   }
 
@@ -64,5 +64,45 @@ contract Admin {
     returns (bool)
   {
     return registeredOrganizationmap[_organizationEndorser] != address(0x0);
+  }
+
+  function employeeCount() public view returns (uint256) {
+    return registeredEmployees.length;
+  }
+
+  function getEmployeeContractByAddress(address _employee)
+    public
+    view
+    returns (address)
+  {
+    return registeredEmployeesmap[_employee];
+  }
+
+  function getEmployeeContractByIndex(uint256 index)
+    public
+    view
+    returns (address)
+  {
+    return getEmployeeContractByAddress(registeredEmployees[index]);
+  }
+
+  function OrganizationEndorserCount() public view returns (uint256) {
+    return registeredOrganization.length;
+  }
+
+  function getOrganizationContractByAddress(address _organization)
+    public
+    view
+    returns (address)
+  {
+    return registeredOrganizationmap[_organization];
+  }
+
+  function getOrganizationContractByIndex(uint256 index)
+    public
+    view
+    returns (address)
+  {
+    return getOrganizationContractByAddress(registeredOrganization[index]);
   }
 }

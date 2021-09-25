@@ -47,6 +47,11 @@ class CreateUser extends Component {
 
   handleSubmit = async (e) => {
     e.preventDefault();
+    const { ethAddress, name, location, role, description } = this.state;
+    if (!name || !location || !description || !role || !ethAddress) {
+      toast.error("Please fill all the fields!!");
+      return;
+    }
     this.setState({ loading: true, errorMessage: "" });
     const web3 = window.web3;
     const accounts = await web3.eth.getAccounts();
@@ -54,7 +59,7 @@ class CreateUser extends Component {
     const AdminData = await Admin.networks[networkId];
     if (AdminData) {
       const admin = await new web3.eth.Contract(Admin.abi, AdminData.address);
-      const { ethAddress, name, location, role, description } = this.state;
+
       const owner = await admin.methods.owner().call();
       if (owner !== accounts[0]) {
         this.setState({

@@ -6,8 +6,8 @@ import "react-toastify/dist/ReactToastify.css";
 import MetaMaskGuide from "./MetaMaskGuide";
 import { Container } from "semantic-ui-react";
 import { BrowserRouter, Route, Switch } from "react-router-dom";
-import AdminPage from "./pages/Admin/Admin";
 import AdminPageCreate from "./pages/Admin/CreateUser";
+import AllEmployees from "./pages/Admin/AllEmployees";
 
 export default class App extends Component {
   state = {
@@ -67,7 +67,7 @@ export default class App extends Component {
   adminRoutes = () => {
     return (
       <Switch>
-        <Route path="/" exact component={AdminPage} />
+        <Route path="/" exact component={AllEmployees} />
         <Route path="/create-user" exact component={AdminPageCreate} />
       </Switch>
     );
