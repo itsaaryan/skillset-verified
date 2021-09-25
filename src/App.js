@@ -8,6 +8,7 @@ import { Container } from "semantic-ui-react";
 import { BrowserRouter, Route, Switch } from "react-router-dom";
 import AdminPageCreate from "./pages/Admin/CreateUser";
 import AllEmployees from "./pages/Admin/AllEmployees";
+import AllOrganizationEndorser from "./pages/Admin/AllOrganizationEndorser";
 
 export default class App extends Component {
   state = {
@@ -68,6 +69,11 @@ export default class App extends Component {
     return (
       <Switch>
         <Route path="/" exact component={AllEmployees} />
+        <Route
+          path="/all-organization-endorser"
+          exact
+          component={AllOrganizationEndorser}
+        />
         <Route path="/create-user" exact component={AdminPageCreate} />
       </Switch>
     );

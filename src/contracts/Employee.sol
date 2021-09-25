@@ -95,7 +95,7 @@ contract Employee {
   }
 
   function getSkillByName(string memory _name)
-    public
+    private
     view
     returns (
       string memory,
@@ -180,7 +180,7 @@ contract Employee {
   }
 
   function getCertificationByName(string memory _name)
-    public
+    private
     view
     returns (
       string memory,
@@ -259,7 +259,7 @@ contract Employee {
   }
 
   function getWorkExpByAddress(address _organization)
-    public
+    private
     view
     returns (
       string memory,
@@ -341,7 +341,7 @@ contract Employee {
   }
 
   function getEducationByAddress(address _institute)
-    public
+    private
     view
     returns (
       address,
@@ -377,6 +377,4 @@ contract Employee {
   {
     return getEducationByAddress(educations[_index]);
   }
-
-  /****************************************************************************************************************************************/
 }

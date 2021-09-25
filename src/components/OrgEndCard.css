@@ -1,0 +1,29 @@
+.organization-card {
+  width: 70% !important;
+  margin-left: auto !important;
+  margin-right: auto !important;
+  background: #393b3fa6 !important;
+  border-radius: 20px !important;
+  border: 1px solid #45a29a !important;
+  box-shadow: 2px 0px 3px 1px #45a29e !important;
+  color: #66fcf1 !important;
+}
+
+.organization-card > .content > .header {
+  display: flex !important;
+  justify-content: space-between !important;
+  flex-wrap: wrap !important;
+  color: #66fcf1 !important;
+}
+
+.organization-card > .content > .header > small {
+  font-size: 12px !important;
+  font-weight: 600 !important;
+  font-style: italic;
+}
+
+@media only screen and (max-width: 800px) {
+  .organization-card {
+    width: 100% !important;
+  }
+}

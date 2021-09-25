@@ -27,7 +27,18 @@ contract OrganizationEndorser {
     _;
   }
 
-  /**************************************************************Endorse Skills*************************************************************/
+  function getOrganizationInfo()
+    public
+    view
+    returns (
+      string memory,
+      address,
+      string memory,
+      string memory
+    )
+  {
+    return (name, organization_address, description, location);
+  }
 
   address[] allEmployees;
 
@@ -37,5 +48,9 @@ contract OrganizationEndorser {
 
   function totalEmployees() public view returns (uint256) {
     return allEmployees.length;
+  }
+
+  function getEmployeeByIndex(uint256 index) public view returns (address) {
+    return allEmployees[index];
   }
 }
