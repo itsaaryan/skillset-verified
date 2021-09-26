@@ -1,0 +1,49 @@
+.personal-info {
+  background: #393b3fa6 !important;
+  border-radius: 15px !important;
+  border: 1px solid #45a29a !important;
+  box-shadow: 1px 0px 3px 0px #45a29e !important;
+  color: #66fcf1 !important;
+  width: 100% !important;
+}
+
+.personal-info > .content > .header {
+  display: flex !important;
+  justify-content: space-between !important;
+  flex-wrap: wrap !important;
+  color: #66fcf1 !important;
+}
+
+.personal-info > .content > .header > small {
+  font-size: 12px !important;
+  font-weight: 600 !important;
+  font-style: italic;
+}
+
+.employee-des {
+  background: #393b3fa6 !important;
+  border-radius: 15px !important;
+  border: 1px solid #45a29a !important;
+  box-shadow: 1px 0px 3px 0px #45a29e !important;
+  color: #66fcf1 !important;
+  width: 100% !important;
+}
+
+.employee-des > .content > .header {
+  display: flex !important;
+  justify-content: space-between !important;
+  flex-wrap: wrap !important;
+  color: #66fcf1 !important;
+}
+
+.employee-des > .content > .header > small {
+  font-size: 12px !important;
+  font-weight: 600 !important;
+  font-style: italic;
+}
+
+.certification-container {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 18px;
+}

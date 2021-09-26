@@ -1,0 +1,25 @@
+.skill-des {
+  background: #393b3fa6 !important;
+  border-radius: 15px !important;
+  border: 1px solid #45a29a !important;
+  box-shadow: 0px 0px 0px 0px #45a29e !important;
+  color: #66fcf1 !important;
+  width: 100% !important;
+  margin-bottom: 12px !important;
+}
+
+.skill-des > .content > div > .header {
+  display: flex !important;
+  justify-content: space-between !important;
+  flex-wrap: wrap !important;
+  color: #66fcf1 !important;
+}
+
+.skillcard_container {
+  display: flex;
+  justify-content: space-between;
+}
+
+.skillcard_container > div:nth-child(2) {
+  margin-top: 25px;
+}

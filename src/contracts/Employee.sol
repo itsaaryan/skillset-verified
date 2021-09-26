@@ -6,8 +6,8 @@ contract Employee {
   address employee_address;
   string description;
   string location;
-  uint256 overallEndorsement;
-  uint256 endorsecount;
+  uint256[] public overallEndorsement;
+  uint256 public endorsecount;
   string name;
 
   constructor(
@@ -22,6 +22,7 @@ contract Employee {
     employee_address = _employee_address;
     description = _description;
     location = _location;
+    endorsecount = 0;
   }
 
   modifier OnlyEmployee() {
@@ -41,14 +42,7 @@ contract Employee {
       uint256
     )
   {
-    return (
-      employee_address,
-      name,
-      description,
-      location,
-      overallEndorsement,
-      endorsecount
-    );
+    return (employee_address, name, description, location, 0, endorsecount);
   }
 
   /*********************************************************SKILLS SECTION**********************************************************/
@@ -88,7 +82,7 @@ contract Employee {
   {
     require(Admin(admin).isOrganizationEndorser(msg.sender));
     skillmap[_name].overall_percentage = _overall_percentage;
-    overallEndorsement += _overall_percentage;
+    overallEndorsement.push(_overall_percentage);
     endorsecount = endorsecount + 1;
     skillmap[_name].endorsed = true;
     emit skillVerified(employee_address, msg.sender);

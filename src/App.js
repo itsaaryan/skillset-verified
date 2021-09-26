@@ -9,6 +9,7 @@ import { BrowserRouter, Route, Switch } from "react-router-dom";
 import AdminPageCreate from "./pages/Admin/CreateUser";
 import AllEmployees from "./pages/Admin/AllEmployees";
 import AllOrganizationEndorser from "./pages/Admin/AllOrganizationEndorser";
+import EmployeePage from "./pages/Employee/Employee";
 
 export default class App extends Component {
   state = {
@@ -82,8 +83,7 @@ export default class App extends Component {
   employeeRoutes = () => {
     return (
       <Switch>
-        {/* <Route path="/" exact component={EmployeePage} />
-        <Route path="/create-user" exact component={AdminPageCreate} /> */}
+        <Route path="/" exact component={EmployeePage} />
       </Switch>
     );
   };
