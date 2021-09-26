@@ -6,9 +6,14 @@ import Employee from "../../abis/Employee.json";
 import LineChart from "../../components/LineChart";
 import SkillCard from "../../components/SkillCard";
 import "./Employee.css";
+import "./UpdateProfile.css";
 import { buildStyles, CircularProgressbar } from "react-circular-progressbar";
+import GetCertificationModal from "../../components/GetCertificationModal";
+import GetWorkExpModal from "../../components/GetWorkExpModal";
+import GetSkillsModal from "../../components/GetSkillsModals";
+import GetEducationModal from "../../components/GetEducationModal";
 
-export default class EmployeePage extends Component {
+export default class UpdateProfile extends Component {
   state = {
     employeedata: {},
     overallEndorsement: [],
@@ -18,6 +23,10 @@ export default class EmployeePage extends Component {
     educations: [],
     colour: ["#b6e498", "#61dafb", "#764abc", "#83cd29", "#00d1b2"],
     readmore: false,
+    certificationModal: false,
+    workexpModal: false,
+    skillmodal: false,
+    educationmodal: false,
   };
 
   componentDidMount = async () => {
@@ -169,9 +178,41 @@ export default class EmployeePage extends Component {
     this.setState({ educations: neweducation });
   };
 
+  closeCertificationModal = () => {
+    this.setState({ certificationModal: false });
+  };
+
+  closeWorkExpModal = () => {
+    this.setState({ workexpModal: false });
+  };
+
+  closeSkillModal = () => {
+    this.setState({ skillmodal: false });
+  };
+
+  closeEducationModal = () => {
+    this.setState({ educationmodal: false });
+  };
+
   render() {
     return (
       <div>
+        <GetCertificationModal
+          isOpen={this.state.certificationModal}
+          closeCertificationModal={this.closeCertificationModal}
+        />
+        <GetWorkExpModal
+          isOpen={this.state.workexpModal}
+          closeCertificationModal={this.closeWorkExpModal}
+        />
+        <GetSkillsModal
+          isOpen={this.state.skillmodal}
+          closeCertificationModal={this.closeSkillModal}
+        />
+        <GetEducationModal
+          isOpen={this.state.educationmodal}
+          closeCertificationModal={this.closeEducationModal}
+        />
         <Grid>
           <Grid.Row>
             <Grid.Column width={6}>
@@ -207,6 +248,16 @@ export default class EmployeePage extends Component {
                   </div>
                   <br />
                   <div>
+                    <span
+                      className="add-button"
+                      onClick={(e) =>
+                        this.setState({
+                          educationmodal: !this.state.educationmodal,
+                        })
+                      }
+                    >
+                      <i class="fas fa-plus"></i>
+                    </span>
                     <Card.Header
                       style={{ fontSize: "19px", fontWeight: "600" }}
                     >
@@ -249,6 +300,16 @@ export default class EmployeePage extends Component {
             <Grid.Column width={10}>
               <Card className="employee-des">
                 <Card.Content>
+                  <span
+                    className="add-button"
+                    onClick={(e) =>
+                      this.setState({
+                        certificationModal: !this.state.certificationModal,
+                      })
+                    }
+                  >
+                    <i class="fas fa-plus"></i>
+                  </span>
                   <Card.Header>Certifications</Card.Header>
                   <br />
                   <div>
@@ -293,6 +354,16 @@ export default class EmployeePage extends Component {
               </Card>
               <Card className="employee-des">
                 <Card.Content>
+                  <span
+                    className="add-button"
+                    onClick={(e) =>
+                      this.setState({
+                        workexpModal: !this.state.workexpModal,
+                      })
+                    }
+                  >
+                    <i class="fas fa-plus"></i>
+                  </span>
                   <Card.Header>Work Experiences</Card.Header>
                   <br />
                   <div className="education">
@@ -324,7 +395,18 @@ export default class EmployeePage extends Component {
               </Card>
               <Card className="employee-des">
                 <Card.Content>
+                  <span
+                    className="add-button"
+                    onClick={(e) =>
+                      this.setState({
+                        skillmodal: !this.state.skillmodal,
+                      })
+                    }
+                  >
+                    <i class="fas fa-plus"></i>
+                  </span>
                   <Card.Header>Skills</Card.Header>
+                  <br />
                   <br />
                   {this.state.skills?.map((skill, index) => (
                     <div>

@@ -42,6 +42,7 @@
 
 .form-inputs > input::placeholder {
   color: #66fcf1 !important;
+  opacity: 0.7;
 }
 
 .form-inputs > input::selection {

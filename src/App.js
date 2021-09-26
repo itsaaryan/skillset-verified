@@ -10,6 +10,7 @@ import AdminPageCreate from "./pages/Admin/CreateUser";
 import AllEmployees from "./pages/Admin/AllEmployees";
 import AllOrganizationEndorser from "./pages/Admin/AllOrganizationEndorser";
 import EmployeePage from "./pages/Employee/Employee";
+import UpdateProfile from "./pages/Employee/UpdateProfile";
 
 export default class App extends Component {
   state = {
@@ -84,6 +85,7 @@ export default class App extends Component {
     return (
       <Switch>
         <Route path="/" exact component={EmployeePage} />
+        <Route pth="/update-profile" exact component={UpdateProfile} />
       </Switch>
     );
   };

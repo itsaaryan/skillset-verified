@@ -1,0 +1,83 @@
+.modal-des {
+  background: #1e2022ea !important;
+  border-radius: 20px !important;
+  color: #c5c6c7 !important;
+  border: 1px solid #45a29e !important;
+  box-shadow: 2px 0px 5px 1px #45a29e !important;
+}
+
+.modal-heading {
+  background: #1e2022ea !important;
+  border-top-left-radius: 20px !important;
+  border-top-right-radius: 20px !important;
+  font-family: "Grand Hotel", cursive !important;
+  color: #66fcf1 !important;
+  font-size: 35px !important;
+  font-weight: 500 !important;
+  width: 100% !important;
+  text-align: center;
+}
+
+.modal-content {
+  background: #1e2022ea !important;
+}
+
+.modal-actions {
+  background: #1e2022ea !important;
+  border-bottom-left-radius: 20px !important;
+  border-bottom-right-radius: 20px !important;
+}
+
+.horizontal-line {
+  border: none;
+  border-top: 2px solid #45a29e;
+}
+
+.form-inputs > input {
+  border-radius: 20px !important;
+  background: #1e2022ea !important;
+  border: 1px solid #45a29a !important;
+  box-shadow: 2px 0px 3px 1px #45a29e !important;
+  color: #66fcf1 !important;
+}
+
+.form-inputs > input::placeholder {
+  color: #66fcf1 !important;
+  opacity: 0.7;
+}
+
+.form-inputs > input::selection {
+  color: #66fcf1 !important;
+}
+
+.form-inputs > input:focus {
+  box-shadow: 3px 0px 9px 0px #45a29e !important;
+}
+
+.button-css {
+  border-radius: 20px !important;
+  color: #66fcf1 !important;
+  background: #1e2022ea !important;
+  border: 2px solid #45a29a !important;
+  box-shadow: 1px 0px 5px 0px #45a29a !important;
+  text-align: center;
+}
+
+.button-css:hover {
+  background: #66fcf1 !important;
+  color: #1e2022ea !important;
+}
+
+.close-button {
+  border-radius: 20px !important;
+  color: #45a29a !important;
+  background: #1e2022ea !important;
+  border: 2px solid #45a29a !important;
+  box-shadow: 1px 0px 3px 0px #45a29a !important;
+  text-align: center;
+}
+
+.close-button:hover {
+  background: #45a29a !important;
+  color: #1e2022ea !important;
+}

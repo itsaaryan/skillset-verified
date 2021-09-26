@@ -1,0 +1,18 @@
+.add-button {
+  float: right;
+  height: 40px;
+  width: 40px;
+  display: grid;
+  justify-items: center;
+  align-items: center;
+  border: 2px solid rgb(255, 255, 255);
+  background-color: #393b3fa6;
+  border-radius: 50%;
+  box-shadow: inset 0px 0px 10px #45a29e;
+  cursor: pointer;
+}
+
+.add-button:hover {
+  transform: scale(1.1, 1.1);
+  box-shadow: inset 0px 0px 20px #45a29e;
+}
