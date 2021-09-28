@@ -14,8 +14,6 @@ contract Admin {
     _;
   }
 
-  event UserRegister(address indexed EthAddress, string Name);
-
   mapping(address => address) registeredEmployeesmap;
   mapping(address => address) registeredOrganizationmap;
   address[] registeredEmployees;
@@ -49,7 +47,6 @@ contract Admin {
       registeredOrganizationmap[EthAddress] = address(newOrganizationEndorser);
       registeredOrganization.push(EthAddress);
     }
-    emit UserRegister(EthAddress, Name);
   }
 
   /****************************************************************USER SECTION**************************************************/

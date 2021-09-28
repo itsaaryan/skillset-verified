@@ -11,6 +11,8 @@ import AllEmployees from "./pages/Admin/AllEmployees";
 import AllOrganizationEndorser from "./pages/Admin/AllOrganizationEndorser";
 import EmployeePage from "./pages/Employee/Employee";
 import UpdateProfile from "./pages/Employee/UpdateProfile";
+import Organization from "./pages/OrganizationEndorser/Organization";
+import EndorseSkill from "./pages/OrganizationEndorser/EndorseSkill";
 
 export default class App extends Component {
   state = {
@@ -90,7 +92,14 @@ export default class App extends Component {
     );
   };
 
-  isOrganizationEndorserRoutes = () => {};
+  isOrganizationEndorserRoutes = () => {
+    return (
+      <Switch>
+        <Route path="/" exact component={Organization} />
+        <Route path="/endorse-skill" exact component={EndorseSkill} />
+      </Switch>
+    );
+  };
 
   noRoleRoutes = () => {};
 

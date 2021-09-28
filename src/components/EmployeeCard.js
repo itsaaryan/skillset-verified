@@ -6,176 +6,10 @@ import "./EmployeeCard.css";
 export default class EmployeeCard extends Component {
   state = {
     employeedata: {},
-    skills: [
-      {
-        name: "C++",
-        overall_percentage: "97%",
-        experience: "2 years",
-        endorsed: false,
-        endorser_address: "0x0",
-        review: "",
-      },
-      {
-        name: "Java",
-        overall_percentage: "97%",
-        experience: "2 years",
-        endorsed: false,
-        endorser_address: "0x0",
-        review: "",
-      },
-      {
-        name: "Python",
-        overall_percentage: "97%",
-        experience: "2 years",
-        endorsed: false,
-        endorser_address: "0x0",
-        review: "",
-      },
-      {
-        name: "Javascript",
-        overall_percentage: "97%",
-        experience: "2 years",
-        endorsed: false,
-        endorser_address: "0x0",
-        review: "",
-      },
-      {
-        name: "Node",
-        overall_percentage: "97%",
-        experience: "2 years",
-        endorsed: false,
-        endorser_address: "0x0",
-        review: "",
-      },
-      {
-        name: "React",
-        overall_percentage: "97%",
-        experience: "2 years",
-        endorsed: false,
-        endorser_address: "0x0",
-        review: "",
-      },
-      {
-        name: "CPP",
-        overall_percentage: "97%",
-        experience: "2 years",
-        endorsed: false,
-        endorser_address: "0x0",
-        review: "",
-      },
-      {
-        name: "Mongo",
-        overall_percentage: "97%",
-        experience: "2 years",
-        endorsed: false,
-        endorser_address: "0x0",
-        review: "",
-      },
-      {
-        name: "Mongo",
-        overall_percentage: "97%",
-        experience: "2 years",
-        endorsed: false,
-        endorser_address: "0x0",
-        review: "",
-      },
-      {
-        name: "Mongo",
-        overall_percentage: "97%",
-        experience: "2 years",
-        endorsed: false,
-        endorser_address: "0x0",
-        review: "",
-      },
-      {
-        name: "Mongo",
-        overall_percentage: "97%",
-        experience: "2 years",
-        endorsed: false,
-        endorser_address: "0x0",
-        review: "",
-      },
-      {
-        name: "Mongo",
-        overall_percentage: "97%",
-        experience: "2 years",
-        endorsed: false,
-        endorser_address: "0x0",
-        review: "",
-      },
-      {
-        name: "Mongo",
-        overall_percentage: "97%",
-        experience: "2 years",
-        endorsed: false,
-        endorser_address: "0x0",
-        review: "",
-      },
-      {
-        name: "Mongo",
-        overall_percentage: "97%",
-        experience: "2 years",
-        endorsed: false,
-        endorser_address: "0x0",
-        review: "",
-      },
-      {
-        name: "Mongo",
-        overall_percentage: "97%",
-        experience: "2 years",
-        endorsed: false,
-        endorser_address: "0x0",
-        review: "",
-      },
-    ],
-    certifications: [
-      {
-        name: "Udemy Web Dev certificate",
-        organization: "0x0",
-        score: "96%",
-        endorsed: true,
-      },
-      {
-        name: "Udemy Web Dev certificate",
-        organization: "0x0",
-        score: "96%",
-        endorsed: false,
-      },
-    ],
-    workExps: [
-      {
-        role: "Web Developer",
-        organization: "0x0",
-        startdate: "Nov 2020",
-        enddate: "Mar 2021",
-        endorsed: false,
-        description: "Build 200% websites.",
-      },
-      {
-        role: "Web Developer",
-        organization: "NYX Wolves",
-        startdate: "Nov 2020",
-        enddate: "Mar 2021",
-        endorsed: false,
-        description: "Build 200% websites.",
-      },
-    ],
-    educations: [
-      {
-        institute: "0x0",
-        startdate: "Nov 2020",
-        enddate: "Mar 2021",
-        endorsed: false,
-        description: "NSIT, B.Tech, IT",
-      },
-      {
-        institute: "0x0",
-        startdate: "Nov 2020",
-        enddate: "Mar 2021",
-        endorsed: false,
-        description: "NSIT, B.Tech, IT",
-      },
-    ],
+    skills: [],
+    certifications: [],
+    workExps: [],
+    educations: [],
     colour: ["#b6e498", "#61dafb", "#764abc", "#83cd29", "#00d1b2"],
     readmore: false,
   };
@@ -214,7 +48,21 @@ export default class EmployeeCard extends Component {
           EmployeeContract?.methods?.getSkillByIndex(index).call()
         )
     );
-    // this.setState({ skills });
+
+    var newskills = [];
+    skills.forEach((certi) => {
+      newskills.push({
+        name: certi[0],
+        overall_percentage: certi[1],
+        experience: certi[2],
+        endorsed: certi[3],
+        endorser_address: certi[4],
+        review: certi[5],
+      });
+      return;
+    });
+
+    this.setState({ skills: newskills });
   };
 
   getCertifications = async (EmployeeContract) => {
@@ -228,7 +76,17 @@ export default class EmployeeCard extends Component {
           EmployeeContract?.methods?.getCertificationByIndex(index).call()
         )
     );
-    //this.setState({ certifications });
+    var newcertifications = [];
+    certifications.forEach((certi) => {
+      newcertifications.push({
+        name: certi[0],
+        organization: certi[1],
+        score: certi[2],
+        endorsed: certi[3],
+      });
+      return;
+    });
+    this.setState({ certifications: newcertifications });
   };
 
   getWorkExp = async (EmployeeContract) => {
@@ -242,7 +100,21 @@ export default class EmployeeCard extends Component {
           EmployeeContract?.methods?.getWorkExpByIndex(index).call()
         )
     );
-    // this.setState({ workExps });
+
+    var newworkExps = [];
+    workExps.forEach((work) => {
+      newworkExps.push({
+        role: work[0],
+        organization: work[1],
+        startdate: work[2],
+        enddate: work[3],
+        endorsed: work[4],
+        description: work[5],
+      });
+      return;
+    });
+
+    this.setState({ workExps: newworkExps });
   };
 
   getEducation = async (EmployeeContract) => {
@@ -256,7 +128,18 @@ export default class EmployeeCard extends Component {
           EmployeeContract?.methods?.getEducationByIndex(index).call()
         )
     );
-    // this.setState({ educations });
+    var neweducation = [];
+    educations.forEach((certi) => {
+      neweducation.push({
+        institute: certi[0],
+        startdate: certi[1],
+        enddate: certi[2],
+        endorsed: certi[3],
+        description: certi[4],
+      });
+      return;
+    });
+    this.setState({ educations: neweducation });
   };
 
   render() {

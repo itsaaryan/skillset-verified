@@ -1,5 +1,4 @@
 pragma solidity >=0.5.0 <0.9.0;
-import "./Admin.sol";
 
 contract Employee {
   address admin;
@@ -45,6 +44,16 @@ contract Employee {
     return (employee_address, name, description, location, 0, endorsecount);
   }
 
+  function editInfo(
+    string memory _name,
+    string memory _descrip,
+    string memory _location
+  ) public OnlyEmployee {
+    name = _name;
+    description = _descrip;
+    location = _location;
+  }
+
   /*********************************************************SKILLS SECTION**********************************************************/
 
   struct skillInfo {
@@ -54,14 +63,11 @@ contract Employee {
     bool endorsed;
     address endorser_address;
     string review;
+    bool visible;
   }
 
   mapping(string => skillInfo) skillmap;
   string[] skills;
-
-  event skillVerified(address indexed employee, address indexed endorser);
-
-  event skillAdded(address indexed employee, string skillname);
 
   function addSkill(string memory _name, string memory _experience)
     public
@@ -72,20 +78,23 @@ contract Employee {
     employeeSkillSet.experience = _experience;
     employeeSkillSet.overall_percentage = 0;
     employeeSkillSet.endorsed = false;
+    employeeSkillSet.visible = true;
     skillmap[_name] = employeeSkillSet;
     skills.push(_name);
-    emit skillAdded(msg.sender, _name);
   }
 
-  function endorseSkill(string memory _name, uint256 _overall_percentage)
-    public
-  {
-    require(Admin(admin).isOrganizationEndorser(msg.sender));
+  function endorseSkill(
+    string memory _name,
+    uint256 _overall_percentage,
+    string memory _review
+  ) public {
+    require(skillmap[_name].visible);
     skillmap[_name].overall_percentage = _overall_percentage;
     overallEndorsement.push(_overall_percentage);
     endorsecount = endorsecount + 1;
     skillmap[_name].endorsed = true;
-    emit skillVerified(employee_address, msg.sender);
+    skillmap[_name].endorser_address = msg.sender;
+    skillmap[_name].review = _review;
   }
 
   function getSkillByName(string memory _name)
@@ -129,23 +138,18 @@ contract Employee {
     return getSkillByName(skills[_index]);
   }
 
+  function deleteSkill(string memory _name) public OnlyEmployee {
+    skillmap[_name].visible = false;
+  }
+
   /*********************************************************CERTIFICATION SECTION**********************************************************/
-
-  event certificationAdded(
-    address indexed employee,
-    address indexed organization
-  );
-
-  event certificationVerified(
-    address indexed employee,
-    address indexed organization
-  );
 
   struct certificationInfo {
     string name;
     address organization;
     uint256 score;
     bool endorsed;
+    bool visible;
   }
 
   mapping(string => certificationInfo) certificationmap;
@@ -161,16 +165,14 @@ contract Employee {
     newcertificationInfo.organization = _organization;
     newcertificationInfo.score = _score;
     newcertificationInfo.endorsed = false;
+    newcertificationInfo.visible = true;
     certificationmap[_name] = newcertificationInfo;
     certifications.push(_name);
-    emit certificationAdded(msg.sender, _organization);
   }
 
   function endorseCertification(string memory _name) public {
-    require(Admin(admin).isOrganizationEndorser(msg.sender));
     require(msg.sender == certificationmap[_name].organization);
     certificationmap[_name].endorsed = true;
-    emit certificationVerified(employee_address, msg.sender);
   }
 
   function getCertificationByName(string memory _name)
@@ -208,11 +210,11 @@ contract Employee {
     return getCertificationByName(certifications[_index]);
   }
 
+  function deleteCertification(string memory _name) public OnlyEmployee {
+    certificationmap[_name].visible = false;
+  }
+
   /********************************************************************Work Experience Section********************************************************************/
-
-  event workexpAdded(address indexed employee, address indexed organization);
-
-  event workexpEndorsed(address indexed employee, address indexed organization);
 
   struct workexpInfo {
     string role;
@@ -221,6 +223,7 @@ contract Employee {
     string enddate;
     bool endorsed;
     string description;
+    bool visible;
   }
 
   mapping(address => workexpInfo) workexpmap;
@@ -239,17 +242,15 @@ contract Employee {
     newworkexp.startdate = _startdate;
     newworkexp.enddate = _enddate;
     newworkexp.endorsed = false;
+    newworkexp.visible = true;
     newworkexp.description = _description;
     workexpmap[_organization] = newworkexp;
     workexps.push(_organization);
-    emit workexpAdded(msg.sender, _organization);
   }
 
   function endorseWorkExp() public {
-    require(Admin(admin).isOrganizationEndorser(msg.sender));
     require(workexpmap[msg.sender].organization != address(0x0));
     workexpmap[msg.sender].endorsed = true;
-    emit workexpEndorsed(employee_address, msg.sender);
   }
 
   function getWorkExpByAddress(address _organization)
@@ -293,11 +294,11 @@ contract Employee {
     return getWorkExpByAddress(workexps[_index]);
   }
 
+  function deleteWorkExp(address org) public OnlyEmployee {
+    workexpmap[org].visible = false;
+  }
+
   /********************************************************************Education Section********************************************************************/
-
-  event EducationAdded(address indexed employee, address indexed institute);
-
-  event educationEndorsed(address indexed employee, address indexed institute);
 
   struct educationInfo {
     address institute;
@@ -324,14 +325,11 @@ contract Employee {
     newEducation.description = _description;
     educationmap[_institute] = newEducation;
     educations.push(_institute);
-    emit EducationAdded(msg.sender, _institute);
   }
 
   function endorseEducation() public {
-    require(Admin(admin).isOrganizationEndorser(msg.sender));
     require(educationmap[msg.sender].institute != address(0x0));
     educationmap[msg.sender].endorsed = true;
-    emit educationEndorsed(employee_address, msg.sender);
   }
 
   function getEducationByAddress(address _institute)

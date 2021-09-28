@@ -1,5 +1,4 @@
 pragma solidity >=0.5.0 <0.9.0;
-import "./Admin.sol";
 
 contract OrganizationEndorser {
   address admin;
@@ -23,7 +22,7 @@ contract OrganizationEndorser {
   }
 
   modifier onlyOrganization() {
-    require(Admin(admin).isOrganizationEndorser(msg.sender));
+    require(msg.sender == organization_address);
     _;
   }
 
@@ -38,6 +37,10 @@ contract OrganizationEndorser {
     )
   {
     return (name, organization_address, description, location);
+  }
+
+  function editInfo(string memory d) public onlyOrganization {
+    description = d;
   }
 
   address[] allEmployees;
