@@ -12,6 +12,7 @@ import GetCertificationModal from "../../components/GetCertificationModal";
 import GetWorkExpModal from "../../components/GetWorkExpModal";
 import GetSkillsModal from "../../components/GetSkillsModals";
 import GetEducationModal from "../../components/GetEducationModal";
+import GetEditFieldModal from "../../components/GetEditFieldModal";
 
 export default class UpdateProfile extends Component {
   state = {
@@ -27,6 +28,8 @@ export default class UpdateProfile extends Component {
     workexpModal: false,
     skillmodal: false,
     educationmodal: false,
+    editFieldModal: false,
+    isDescription: false,
   };
 
   componentDidMount = async () => {
@@ -194,6 +197,10 @@ export default class UpdateProfile extends Component {
     this.setState({ educationmodal: false });
   };
 
+  closeEditFieldModal = () => {
+    this.setState({ editFieldModal: false });
+  };
+
   render() {
     return (
       <div>
@@ -213,13 +220,36 @@ export default class UpdateProfile extends Component {
           isOpen={this.state.educationmodal}
           closeCertificationModal={this.closeEducationModal}
         />
+
+        <GetEditFieldModal
+          isOpen={this.state.editFieldModal}
+          closeEditFieldModal={this.closeEditFieldModal}
+          name={this.state.employeedata?.name}
+          location={this.state.employeedata?.location}
+          description={this.state.employeedata?.description}
+          isDescription={this.state.isDescription}
+        />
+
         <Grid>
           <Grid.Row>
             <Grid.Column width={6}>
               <Card className="personal-info">
                 <Card.Content>
                   <Card.Header>
-                    {this.state.employeedata?.name}
+                    <div className="edit-heading">
+                      <span>{this.state.employeedata?.name}</span>
+                      <span
+                        className="add-button"
+                        onClick={(e) =>
+                          this.setState({
+                            editFieldModal: !this.state.editFieldModal,
+                            isDescription: false,
+                          })
+                        }
+                      >
+                        <i class="fas fa-pencil-alt"></i>
+                      </span>
+                    </div>
                     <small style={{ wordBreak: "break-word" }}>
                       {this.state.employeedata?.ethAddress}
                     </small>
@@ -244,7 +274,22 @@ export default class UpdateProfile extends Component {
               </Card>
               <Card className="employee-des">
                 <Card.Content>
-                  <Card.Header>About</Card.Header>
+                  <Card.Header>
+                    <div className="edit-heading">
+                      <span>About</span>
+                      <span
+                        className="add-button"
+                        onClick={(e) =>
+                          this.setState({
+                            editFieldModal: !this.state.editFieldModal,
+                            isDescription: true,
+                          })
+                        }
+                      >
+                        <i class="fas fa-pencil-alt"></i>
+                      </span>
+                    </div>
+                  </Card.Header>
                   <div>
                     <p>{this.state.employeedata?.description}</p>
                   </div>
@@ -260,6 +305,7 @@ export default class UpdateProfile extends Component {
                     >
                       <i class="fas fa-plus"></i>
                     </span>
+
                     <Card.Header
                       style={{ fontSize: "19px", fontWeight: "600" }}
                     >

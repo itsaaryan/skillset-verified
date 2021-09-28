@@ -39,10 +39,6 @@ contract OrganizationEndorser {
     return (name, organization_address, description, location);
   }
 
-  function editInfo(string memory d) public onlyOrganization {
-    description = d;
-  }
-
   address[] allEmployees;
 
   function addEmployees(address employee_address) public onlyOrganization {

@@ -4,7 +4,6 @@ import Admin from "../../abis/Admin.json";
 import { toast } from "react-toastify";
 import OrgEndCard from "../../components/OrgEndCard";
 import EmployeeCard from "../../components/EmployeeCard";
-import { Card } from "semantic-ui-react";
 import "./Organization.css";
 import GetEmployeeModal from "../../components/GetEmployeeModal";
 
@@ -67,7 +66,7 @@ export default class OrganizationEndorser extends Component {
         <br />
         <div>
           <div
-            style={{ width: "70%", marginLeft: "auto", marginRight: "auto" }}
+            style={{ width: "68%", marginLeft: "auto", marginRight: "auto" }}
           >
             <span
               className="add-employee"

@@ -106,7 +106,8 @@ contract Employee {
       string memory,
       bool,
       address,
-      string memory
+      string memory,
+      bool
     )
   {
     return (
@@ -115,7 +116,8 @@ contract Employee {
       skillmap[_name].experience,
       skillmap[_name].endorsed,
       skillmap[_name].endorser_address,
-      skillmap[_name].review
+      skillmap[_name].review,
+      skillmap[_name].visible
     );
   }
 
@@ -132,7 +134,8 @@ contract Employee {
       string memory,
       bool,
       address,
-      string memory
+      string memory,
+      bool
     )
   {
     return getSkillByName(skills[_index]);
@@ -182,6 +185,7 @@ contract Employee {
       string memory,
       address,
       uint256,
+      bool,
       bool
     )
   {
@@ -189,7 +193,8 @@ contract Employee {
       certificationmap[_name].name,
       certificationmap[_name].organization,
       certificationmap[_name].score,
-      skillmap[_name].endorsed
+      certificationmap[_name].endorsed,
+      certificationmap[_name].visible
     );
   }
 
@@ -204,6 +209,7 @@ contract Employee {
       string memory,
       address,
       uint256,
+      bool,
       bool
     )
   {
@@ -262,7 +268,8 @@ contract Employee {
       string memory,
       string memory,
       bool,
-      string memory
+      string memory,
+      bool
     )
   {
     return (
@@ -271,7 +278,8 @@ contract Employee {
       workexpmap[_organization].startdate,
       workexpmap[_organization].enddate,
       workexpmap[_organization].endorsed,
-      workexpmap[_organization].description
+      workexpmap[_organization].description,
+      workexpmap[_organization].visible
     );
   }
 
@@ -288,7 +296,8 @@ contract Employee {
       string memory,
       string memory,
       bool,
-      string memory
+      string memory,
+      bool
     )
   {
     return getWorkExpByAddress(workexps[_index]);

@@ -173,7 +173,7 @@ export default class EmployeePage extends Component {
     return (
       <div>
         <Grid>
-          <Grid.Row stretched>
+          <Grid.Row>
             <Grid.Column width={6}>
               <Card className="personal-info">
                 <Card.Content>
