@@ -13,6 +13,7 @@ import EmployeePage from "./pages/Employee/Employee";
 import UpdateProfile from "./pages/Employee/UpdateProfile";
 import Organization from "./pages/OrganizationEndorser/Organization";
 import EndorseSkill from "./pages/OrganizationEndorser/EndorseSkill";
+import Endorse from "./pages/OrganizationEndorser/EndorseSection";
 
 export default class App extends Component {
   state = {
@@ -97,6 +98,7 @@ export default class App extends Component {
       <Switch>
         <Route path="/" exact component={Organization} />
         <Route path="/endorse-skill" exact component={EndorseSkill} />
+        <Route path="/endorse-section" exact component={Endorse} />
       </Switch>
     );
   };

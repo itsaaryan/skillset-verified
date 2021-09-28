@@ -11,6 +11,7 @@ export default class GetEducationModal extends Component {
     startdate: "",
     enddate: "",
     description: "",
+    loading: false,
   };
 
   handleSubmit = async (e) => {
@@ -19,6 +20,7 @@ export default class GetEducationModal extends Component {
       toast.error("Please enter all the fields.");
       return;
     }
+    this.setState({ loading: true });
     e.preventDefault();
     const web3 = window.web3;
     const networkId = await web3.eth.net.getId();
@@ -46,6 +48,7 @@ export default class GetEducationModal extends Component {
     } else {
       toast.error("The Admin Contract does not exist on this network!");
     }
+    this.setState({ loading: false });
     this.props.closeCertificationModal();
   };
 
@@ -128,6 +131,7 @@ export default class GetEducationModal extends Component {
             color="green"
             icon="save"
             content="Save"
+            loading={this.state.loading}
           />
         </Modal.Actions>
       </Modal>

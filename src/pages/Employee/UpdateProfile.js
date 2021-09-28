@@ -220,7 +220,9 @@ export default class UpdateProfile extends Component {
                 <Card.Content>
                   <Card.Header>
                     {this.state.employeedata?.name}
-                    <small>{this.state.employeedata?.ethAddress}</small>
+                    <small style={{ wordBreak: "break-word" }}>
+                      {this.state.employeedata?.ethAddress}
+                    </small>
                   </Card.Header>
                   <br />
                   <div>
@@ -269,7 +271,9 @@ export default class UpdateProfile extends Component {
                         <div className="education-design" key={index}>
                           <div>
                             <p>{education.description}</p>
-                            <small>{education.institute}</small>
+                            <small style={{ wordBreak: "break-word" }}>
+                              {education.institute}
+                            </small>
                           </div>
                           <div>
                             <small>
@@ -312,12 +316,15 @@ export default class UpdateProfile extends Component {
                   </span>
                   <Card.Header>Certifications</Card.Header>
                   <br />
+                  <br />
                   <div>
                     {this.state.certifications?.map((certi, index) => (
                       <div key={index} className="certification-container">
                         <div>
                           <p>{certi.name}</p>
-                          <small>{certi.organization}</small>
+                          <small style={{ wordBreak: "break-word" }}>
+                            {certi.organization}
+                          </small>
                           <p
                             style={{
                               color: certi.endorsed ? "#00d1b2" : "yellow",
@@ -371,7 +378,9 @@ export default class UpdateProfile extends Component {
                       <div className="education-design" key={index}>
                         <div>
                           <p>{workExp.role}</p>
-                          <small>{workExp.organization}</small>
+                          <small style={{ wordBreak: "break-word" }}>
+                            {workExp.organization}
+                          </small>
                         </div>
                         <div>
                           <small>

@@ -9,9 +9,11 @@ export default class GetSkillsModal extends Component {
   state = {
     name: "",
     experience: "",
+    loading: false,
   };
 
   handleSubmit = async (e) => {
+    this.setState({ loading: true });
     const { name, experience } = this.state;
     if (!name || !experience) {
       toast.error("Please enter all the fields.");
@@ -42,6 +44,7 @@ export default class GetSkillsModal extends Component {
     } else {
       toast.error("The Admin Contract does not exist on this network!");
     }
+    this.setState({ loading: false });
     this.props.closeCertificationModal();
   };
 
@@ -104,6 +107,7 @@ export default class GetSkillsModal extends Component {
             color="green"
             icon="save"
             content="Save"
+            loading={this.state.loading}
           />
         </Modal.Actions>
       </Modal>

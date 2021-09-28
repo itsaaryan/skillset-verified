@@ -4,11 +4,15 @@ import Admin from "../../abis/Admin.json";
 import { toast } from "react-toastify";
 import OrgEndCard from "../../components/OrgEndCard";
 import EmployeeCard from "../../components/EmployeeCard";
+import { Card } from "semantic-ui-react";
+import "./Organization.css";
+import GetEmployeeModal from "../../components/GetEmployeeModal";
 
 export default class OrganizationEndorser extends Component {
   state = {
     orgcontractAddress: "",
     employees: [],
+    employeemodal: false,
   };
 
   componentDidMount = async () => {
@@ -31,36 +35,56 @@ export default class OrganizationEndorser extends Component {
       const employees = await Promise.all(
         Array(parseInt(employeeCount))
           .fill()
-          .map((ele, index) =>
-            orgContract?.methods?.getEmployeeByIndex(index).call()
-          )
+          .map(async (ele, index) => {
+            const employee = await orgContract?.methods
+              ?.getEmployeeByIndex(index)
+              .call();
+            return admin.methods.getEmployeeContractByAddress(employee).call();
+          })
       );
-      var newarr = [];
-      await employees.forEach(async (ele) => {
-        const employeecontact = await admin.methods
-          .getEmployeeContractByAddress(ele)
-          .call();
-        newarr.push(employeecontact);
-        return;
-      });
-      this.setState({ orgContractAddress, employees: newarr });
+      // console.log("emp", employees);
+
+      this.setState({ orgContractAddress, employees });
     } else {
       toast.error("The Admin Contract does not exist on this network!");
     }
   };
 
+  closeEmployeeModal = () => {
+    this.setState({ employeemodal: false });
+  };
+
   render() {
     return (
       <div>
+        <GetEmployeeModal
+          isOpen={this.state.employeemodal}
+          closeEmployeeModal={this.closeEmployeeModal}
+        />
         {this.state.orgContractAddress && (
           <OrgEndCard OrgEndContractAddress={this.state.orgContractAddress} />
         )}
-        {this.state.employees?.length > 0 && (
-          <h2 className="card-heading">Employees in the organization</h2>
-        )}
-        {this.state.employees?.map((employee, index) => (
-          <EmployeeCard key={index} employeeContractAddress={employee} />
-        ))}
+        <br />
+        <div>
+          <div
+            style={{ width: "70%", marginLeft: "auto", marginRight: "auto" }}
+          >
+            <span
+              className="add-employee"
+              onClick={(e) =>
+                this.setState({
+                  employeemodal: !this.state.employeemodal,
+                })
+              }
+            >
+              <span class="fas fa-plus">&nbsp;Add Employee</span>
+            </span>
+            <h2 className="org-card-heading">Employees in the organization</h2>
+          </div>
+          {this.state.employees?.map((employee, index) => (
+            <EmployeeCard key={index} employeeContractAddress={employee} />
+          ))}
+        </div>
       </div>
     );
   }

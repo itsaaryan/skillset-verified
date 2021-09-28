@@ -26,7 +26,9 @@ export default class SkillCard extends Component {
                   <div>
                     <em>Endorsed By:</em>
                     <p>
-                      <small>{skill.endorser_address}</small>
+                      <small style={{ wordBreak: "break-word" }}>
+                        {skill.endorser_address}
+                      </small>
                     </p>
                   </div>
                   <br />

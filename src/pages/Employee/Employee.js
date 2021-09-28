@@ -173,13 +173,15 @@ export default class EmployeePage extends Component {
     return (
       <div>
         <Grid>
-          <Grid.Row>
+          <Grid.Row stretched>
             <Grid.Column width={6}>
               <Card className="personal-info">
                 <Card.Content>
                   <Card.Header>
                     {this.state.employeedata?.name}
-                    <small>{this.state.employeedata?.ethAddress}</small>
+                    <small style={{ wordBreak: "break-word" }}>
+                      {this.state.employeedata?.ethAddress}
+                    </small>
                   </Card.Header>
                   <br />
                   <div>
@@ -216,9 +218,16 @@ export default class EmployeePage extends Component {
                     <div className="education">
                       {this.state.educations?.map((education, index) => (
                         <div className="education-design" key={index}>
-                          <div>
+                          <div style={{ paddingRight: "50px" }}>
                             <p>{education.description}</p>
-                            <small>{education.institute}</small>
+                            <small
+                              style={{
+                                wordBreak: "break-word",
+                                fontSize: "10px",
+                              }}
+                            >
+                              {education.institute}
+                            </small>
                           </div>
                           <div>
                             <small>
@@ -256,7 +265,9 @@ export default class EmployeePage extends Component {
                       <div key={index} className="certification-container">
                         <div>
                           <p>{certi.name}</p>
-                          <small>{certi.organization}</small>
+                          <small style={{ wordBreak: "break-word" }}>
+                            {certi.organization}
+                          </small>
                           <p
                             style={{
                               color: certi.endorsed ? "#00d1b2" : "yellow",
@@ -300,7 +311,9 @@ export default class EmployeePage extends Component {
                       <div className="education-design" key={index}>
                         <div>
                           <p>{workExp.role}</p>
-                          <small>{workExp.organization}</small>
+                          <small style={{ wordBreak: "break-word" }}>
+                            {workExp.organization}
+                          </small>
                         </div>
                         <div>
                           <small>

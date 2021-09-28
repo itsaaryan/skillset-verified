@@ -1,21 +1,19 @@
+import { isProgram } from "@babel/types";
 import React, { Component } from "react";
 import { toast } from "react-toastify";
 import { Button, Form, Header, Modal } from "semantic-ui-react";
 import Admin from "../abis/Admin.json";
-import Employee from "../abis/Employee.json";
+import OrgEnd from "../abis/OrganizationEndorser.json";
 import "./Modals.css";
 
-export default class GetCertificationModal extends Component {
+export default class GetEmployeeModal extends Component {
   state = {
-    name: "",
-    organization: "",
-    score: "",
+    employee_address: "",
     loading: false,
   };
-
   handleSubmit = async (e) => {
-    const { name, organization, score } = this.state;
-    if (!name || !organization || !(score >= 1 && score <= 100)) {
+    const { employee_address } = this.state;
+    if (!employee_address) {
       toast.error("Please enter all the fields.");
       return;
     }
@@ -27,20 +25,18 @@ export default class GetCertificationModal extends Component {
     const accounts = await web3.eth.getAccounts();
     if (AdminData) {
       const admin = await new web3.eth.Contract(Admin.abi, AdminData.address);
-      const employeeContractAddress = await admin?.methods
-        ?.getEmployeeContractByAddress(accounts[0])
+      const orgContractAddress = await admin?.methods
+        ?.getOrganizationContractByAddress(accounts[0])
         .call();
-      const EmployeeContract = await new web3.eth.Contract(
-        Employee.abi,
-        employeeContractAddress
+      const orgContract = await new web3.eth.Contract(
+        OrgEnd.abi,
+        orgContractAddress
       );
       try {
-        await EmployeeContract.methods
-          .addCertification(name, organization, score)
-          .send({
-            from: accounts[0],
-          });
-        toast.success("Certification saved successfullyy!!");
+        await orgContract.methods.addEmployees(employee_address).send({
+          from: accounts[0],
+        });
+        toast.success("Employee Added Successfully!!");
       } catch (err) {
         toast.error(err.message);
       }
@@ -48,7 +44,7 @@ export default class GetCertificationModal extends Component {
       toast.error("The Admin Contract does not exist on this network!");
     }
     this.setState({ loading: false });
-    this.props.closeCertificationModal();
+    this.props.closeEmployeeModal();
   };
 
   handleChange = (e) => {
@@ -68,41 +64,18 @@ export default class GetCertificationModal extends Component {
         <Header
           className="modal-heading"
           icon="pencil"
-          content="Enter Certification Details"
+          content="Enter Employee Address"
           as="h2"
         />
         <Modal.Content className="modal-content">
           <Form className="form-inputs">
             <Form.Field className="form-inputs">
               <input
-                id="name"
-                placeholder="Name"
+                id="employee_address"
+                placeholder="Employee Address"
                 autoComplete="off"
                 autoCorrect="off"
-                value={this.state.name}
-                onChange={this.handleChange}
-              />
-            </Form.Field>
-            <Form.Field className="form-inputs">
-              <input
-                id="organization"
-                placeholder="Organization"
-                autoComplete="off"
-                autoCorrect="off"
-                value={this.state.organization}
-                onChange={this.handleChange}
-              />
-            </Form.Field>
-            <Form.Field className="form-inputs">
-              <input
-                id="score"
-                placeholder="Score"
-                autoComplete="off"
-                autoCorrect="off"
-                type="number"
-                min="1"
-                max="100"
-                value={this.state.score}
+                value={this.state.employee_address}
                 onChange={this.handleChange}
               />
             </Form.Field>
@@ -115,7 +88,7 @@ export default class GetCertificationModal extends Component {
             color="red"
             icon="times"
             content="Close"
-            onClick={() => this.props.closeCertificationModal()}
+            onClick={() => this.props.closeEmployeeModal()}
           />
           <Button
             className="button-css"

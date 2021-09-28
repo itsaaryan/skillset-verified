@@ -1,0 +1,39 @@
+.org-card {
+  width: 70% !important;
+  margin-left: auto !important;
+  margin-right: auto !important;
+  background: #393b3fa6 !important;
+  border-radius: 20px !important;
+  border: 1px solid #45a29a !important;
+  box-shadow: 2px 0px 3px 1px #45a29e !important;
+  color: #66fcf1 !important;
+}
+
+.add-employee {
+  padding: 10px;
+  float: right;
+  display: grid;
+  justify-items: center;
+  align-items: center;
+  border: 2px solid rgb(255, 255, 255);
+  background-color: #393b3fa6;
+  border-radius: 35px;
+  box-shadow: inset 0px 0px 10px #45a29e;
+  cursor: pointer;
+  margin-top: 16px;
+  color: #66fcf1;
+  padding-bottom: 12px;
+  margin-top: -5px;
+}
+
+.add-employee:hover {
+  transform: scale(1.1, 1.1);
+  box-shadow: inset 0px 0px 20px #45a29e;
+}
+
+.org-card-heading {
+  font-family: "Grand Hotel", cursive !important;
+  color: #66fcf1;
+  font-size: 25px;
+  font-weight: 500;
+}
