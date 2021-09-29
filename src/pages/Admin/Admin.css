@@ -7,6 +7,7 @@
   -moz-transform: translate(-50%, -50%);
   -o-transform: translate(-50%, -50%);
   -ms-transform: translate(-50%, -50%);
+  margin-top: 40px;
 }
 
 .card-style {

@@ -14,6 +14,7 @@ import UpdateProfile from "./pages/Employee/UpdateProfile";
 import Organization from "./pages/OrganizationEndorser/Organization";
 import EndorseSkill from "./pages/OrganizationEndorser/EndorseSkill";
 import Endorse from "./pages/OrganizationEndorser/EndorseSection";
+import Navbar from "./components/Navbar";
 
 export default class App extends Component {
   state = {
@@ -116,6 +117,7 @@ export default class App extends Component {
   render() {
     return this.state.isMetamaskPresent ? (
       <BrowserRouter>
+        <Navbar />
         <Container>
           <ToastContainer />
           {this.renderRoutes()}

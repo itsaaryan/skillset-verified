@@ -40,7 +40,6 @@ export default class LineChart extends Component {
     });
   };
   render() {
-    console.log(this.props.overallEndorsement);
     return <Line data={this.state.data} options={this.state.options} />;
   }
 }
