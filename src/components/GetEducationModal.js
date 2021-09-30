@@ -1,9 +1,10 @@
 import React, { Component } from "react";
 import { toast } from "react-toastify";
-import { Button, Form, Header, Modal } from "semantic-ui-react";
+import { Button, Form, Header, Input, Modal } from "semantic-ui-react";
 import Admin from "../abis/Admin.json";
 import Employee from "../abis/Employee.json";
 import "./Modals.css";
+import ScanQR from "./ScanQR";
 
 export default class GetEducationModal extends Component {
   state = {
@@ -12,6 +13,7 @@ export default class GetEducationModal extends Component {
     enddate: "",
     description: "",
     loading: false,
+    scanQR: false,
   };
 
   handleSubmit = async (e) => {
@@ -57,84 +59,107 @@ export default class GetEducationModal extends Component {
     this.setState({ [e.target.id]: e.target.value });
   };
 
+  closeScanQRModal = () => {
+    this.setState({ scanQR: false });
+  };
+
+  handleAddAddress = (res) => {
+    this.setState({ institute: res });
+  };
+
   render() {
     return (
-      <Modal
-        as={Form}
-        onSubmit={(e) => this.handleSubmit(e)}
-        open={this.props.isOpen}
-        size="tiny"
-        className="modal-des"
-      >
-        <Header
-          className="modal-heading"
-          icon="pencil"
-          content="Enter Education Details"
-          as="h2"
+      <>
+        <ScanQR
+          isOpen={this.state.scanQR}
+          closeScanQRModal={this.closeScanQRModal}
+          handleAddAddress={this.handleAddAddress}
         />
-        <Modal.Content className="modal-content">
-          <Form className="form-inputs">
-            <Form.Field className="form-inputs">
-              <input
-                id="institute"
-                placeholder="Institute Address"
-                autoComplete="off"
-                autoCorrect="off"
-                value={this.state.institute}
-                onChange={this.handleChange}
-              />
-            </Form.Field>
-            <Form.Field className="form-inputs">
-              <input
-                id="startdate"
-                placeholder="Start Date"
-                autoComplete="off"
-                autoCorrect="off"
-                value={this.state.startdate}
-                onChange={this.handleChange}
-              />
-            </Form.Field>
-            <Form.Field className="form-inputs">
-              <input
-                id="enddate"
-                placeholder="End Date"
-                autoComplete="off"
-                autoCorrect="off"
-                value={this.state.enddate}
-                onChange={this.handleChange}
-              />
-            </Form.Field>
-            <Form.Field className="form-inputs">
-              <input
-                id="description"
-                placeholder="Degree & Major"
-                autoComplete="off"
-                autoCorrect="off"
-                value={this.state.description}
-                onChange={this.handleChange}
-              />
-            </Form.Field>
-          </Form>
-        </Modal.Content>
-        <Modal.Actions className="modal-actions">
-          <Button
-            className="close-button"
-            type="button"
-            color="red"
-            icon="times"
-            content="Close"
-            onClick={() => this.props.closeCertificationModal()}
+        <Modal
+          as={Form}
+          onSubmit={(e) => this.handleSubmit(e)}
+          open={this.props.isOpen}
+          size="tiny"
+          className="modal-des"
+        >
+          <Header
+            className="modal-heading"
+            icon="pencil"
+            content="Enter Education Details"
+            as="h2"
           />
-          <Button
-            className="button-css"
-            type="submit"
-            color="green"
-            icon="save"
-            content="Save"
-            loading={this.state.loading}
-          />
-        </Modal.Actions>
-      </Modal>
+          <Modal.Content className="modal-content">
+            <Form className="form-inputs">
+              <Form.Field className="form-inputs">
+                <Input action>
+                  <input
+                    id="institute"
+                    placeholder="Institute Address"
+                    autoComplete="off"
+                    autoCorrect="off"
+                    value={this.state.institute}
+                    onChange={this.handleChange}
+                  />
+                  <Button
+                    type="button"
+                    content="QR"
+                    icon="qrcode"
+                    onClick={() => this.setState({ scanQR: true })}
+                  />
+                </Input>
+              </Form.Field>
+              <Form.Field className="form-inputs">
+                <input
+                  id="startdate"
+                  placeholder="Start Date"
+                  autoComplete="off"
+                  autoCorrect="off"
+                  value={this.state.startdate}
+                  onChange={this.handleChange}
+                />
+              </Form.Field>
+              <Form.Field className="form-inputs">
+                <input
+                  id="enddate"
+                  placeholder="End Date"
+                  autoComplete="off"
+                  autoCorrect="off"
+                  value={this.state.enddate}
+                  onChange={this.handleChange}
+                />
+              </Form.Field>
+              <Form.Field className="form-inputs">
+                <input
+                  id="description"
+                  placeholder="Degree & Major"
+                  autoComplete="off"
+                  autoCorrect="off"
+                  value={this.state.description}
+                  onChange={this.handleChange}
+                />
+              </Form.Field>
+            </Form>
+          </Modal.Content>
+          <Modal.Actions className="modal-actions">
+            <Button
+              className="close-button"
+              type="button"
+              color="red"
+              icon="times"
+              content="Close"
+              onClick={() => this.props.closeCertificationModal()}
+            />
+            <Button
+              className="button-css"
+              type="submit"
+              color="green"
+              icon="save"
+              content="Save"
+              loading={this.state.loading}
+            />
+          </Modal.Actions>
+        </Modal>
+      </>
     );
   }
 }

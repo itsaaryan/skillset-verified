@@ -1,9 +1,17 @@
 import React, { Component } from "react";
-import { Button, Card, Dropdown, Form, Message } from "semantic-ui-react";
+import {
+  Button,
+  Card,
+  Dropdown,
+  Form,
+  Input,
+  Message,
+} from "semantic-ui-react";
 import "./EndorsePage.css";
 import Admin from "../../abis/Admin.json";
 import Employee from "../../abis/Employee.json";
 import { toast } from "react-toastify";
+import ScanQR from "../../components/ScanQR";
 
 export default class Endorse extends Component {
   state = {
@@ -11,6 +19,7 @@ export default class Endorse extends Component {
     section: "",
     skillLoading: false,
     certification_name: "",
+    scanQR: false,
   };
 
   handleChange = (e) => {
@@ -74,6 +83,14 @@ export default class Endorse extends Component {
     });
   };
 
+  closeScanQRModal = () => {
+    this.setState({ scanQR: false });
+  };
+
+  handleAddAddress = (res) => {
+    this.setState({ employee_address: res });
+  };
+
   roleOptions = [
     {
       key: "0",
@@ -103,70 +120,85 @@ export default class Endorse extends Component {
 
   render() {
     return (
-      <div className="endorse-section">
-        <Card className="card-style">
-          <Card.Content>
-            <Card.Header>
-              <h2 className="card-heading">Endorse Section</h2>
-            </Card.Header>
-            <br />
-            <div>
-              <Form
-                className="form-inputs"
-                onSubmit={this.handleSkillEndorse}
-                error={!!this.state.skillError}
-              >
-                <Form.Field className="form-inputs">
-                  <input
-                    id="employee_address"
-                    placeholder="Employee Address"
-                    autoComplete="off"
-                    autoCorrect="off"
-                    value={this.state.employee_address}
-                    onChange={this.handleChange}
-                  />
-                </Form.Field>
-                <Form.Field className="form-inputs">
-                  <Dropdown
-                    placeholder="Select Role"
-                    fluid
-                    selection
-                    options={this.roleOptions}
-                    onChange={this.handleDropdownSelect}
-                  />
-                </Form.Field>
-                {this.state.section == "3" && (
+      <>
+        <ScanQR
+          isOpen={this.state.scanQR}
+          closeScanQRModal={this.closeScanQRModal}
+          handleAddAddress={this.handleAddAddress}
+        />
+        <div className="endorse-section">
+          <Card className="card-style">
+            <Card.Content>
+              <Card.Header>
+                <h2 className="card-heading">Endorse Section</h2>
+              </Card.Header>
+              <br />
+              <div>
+                <Form
+                  className="form-inputs"
+                  onSubmit={this.handleSkillEndorse}
+                  error={!!this.state.skillError}
+                >
                   <Form.Field className="form-inputs">
-                    <input
-                      id="certification_name"
-                      placeholder="Certification Name"
-                      autoComplete="off"
-                      autoCorrect="off"
-                      value={this.state.certification_name}
-                      onChange={this.handleChange}
+                    <Input action>
+                      <input
+                        id="employee_address"
+                        placeholder="0x0"
+                        autoComplete="off"
+                        autoCorrect="off"
+                        value={this.state.employee_address}
+                        onChange={this.handleChange}
+                      />
+                      <Button
+                        type="button"
+                        content="QR"
+                        icon="qrcode"
+                        onClick={() => this.setState({ scanQR: true })}
+                      />
+                    </Input>
+                  </Form.Field>
+                  <Form.Field className="form-inputs">
+                    <Dropdown
+                      placeholder="Select Role"
+                      fluid
+                      selection
+                      options={this.roleOptions}
+                      onChange={this.handleDropdownSelect}
                     />
                   </Form.Field>
-                )}
-                <br />
-                <Message
-                  error
-                  header="Oops!!"
-                  content={this.state.skillError}
-                />
-                <br />
-                <Button
-                  className="button-css"
-                  type="submit"
-                  icon="save"
-                  content="Endorse"
-                  floated="right"
-                  loading={this.state.skillLoading}
-                />
-              </Form>
-            </div>
-          </Card.Content>
-        </Card>
-      </div>
+                  {this.state.section == "3" && (
+                    <Form.Field className="form-inputs">
+                      <input
+                        id="certification_name"
+                        placeholder="Certification Name"
+                        autoComplete="off"
+                        autoCorrect="off"
+                        value={this.state.certification_name}
+                        onChange={this.handleChange}
+                      />
+                    </Form.Field>
+                  )}
+                  <br />
+                  <Message
+                    error
+                    header="Oops!!"
+                    content={this.state.skillError}
+                  />
+                  <br />
+                  <Button
+                    className="button-css"
+                    type="submit"
+                    icon="save"
+                    content="Endorse"
+                    floated="right"
+                    loading={this.state.skillLoading}
+                  />
+                </Form>
+              </div>
+            </Card.Content>
+          </Card>
+        </div>
+      </>
     );
   }
 }

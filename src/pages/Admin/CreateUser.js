@@ -1,9 +1,17 @@
 import React, { Component } from "react";
-import { Link, withRouter } from "react-router-dom";
-import { Button, Card, Dropdown, Form, Message } from "semantic-ui-react";
+import { withRouter } from "react-router-dom";
+import {
+  Button,
+  Card,
+  Dropdown,
+  Form,
+  Input,
+  Message,
+} from "semantic-ui-react";
 import "./Admin.css";
 import Admin from "../../abis/Admin.json";
 import { toast } from "react-toastify";
+import ScanQR from "../../components/ScanQR";
 
 class CreateUser extends Component {
   state = {
@@ -14,6 +22,7 @@ class CreateUser extends Component {
     role: 0,
     loading: false,
     errorMessage: "",
+    scanQR: false,
   };
 
   roleOptions = [
@@ -88,91 +97,114 @@ class CreateUser extends Component {
     }
   };
 
+  closeScanQRModal = () => {
+    this.setState({ scanQR: false });
+  };
+
+  handleAddAddress = (res) => {
+    this.setState({ ethAddress: res });
+  };
+
   render() {
     return (
-      <div className="create-user">
-        <Card className="card-style">
-          <Card.Content>
-            <Card.Header centered>
-              <h2 className="card-heading">Register New User</h2>
-            </Card.Header>
-            <hr className="horizontal-line"></hr>
-            <br></br>
-            <Form error={!!this.state.errorMessage}>
-              <Form.Field className="form-inputs">
-                <input
-                  id="name"
-                  placeholder="Name"
-                  autoComplete="off"
-                  autoCorrect="off"
-                  value={this.state.name}
-                  onChange={this.handleChange}
+      <>
+        <ScanQR
+          isOpen={this.state.scanQR}
+          closeScanQRModal={this.closeScanQRModal}
+          handleAddAddress={this.handleAddAddress}
+        />
+        <div className="create-user">
+          <Card className="card-style">
+            <Card.Content>
+              <Card.Header centered>
+                <h2 className="card-heading">Register New User</h2>
+              </Card.Header>
+              <hr className="horizontal-line"></hr>
+              <br></br>
+              <Form error={!!this.state.errorMessage}>
+                <Form.Field className="form-inputs">
+                  <input
+                    id="name"
+                    placeholder="Name"
+                    autoComplete="off"
+                    autoCorrect="off"
+                    value={this.state.name}
+                    onChange={this.handleChange}
+                  />
+                </Form.Field>
+                <br />
+                <Form.Field className="form-inputs">
+                  <input
+                    id="location"
+                    placeholder="Location"
+                    autoComplete="off"
+                    autoCorrect="off"
+                    value={this.state.location}
+                    onChange={this.handleChange}
+                  />
+                </Form.Field>
+                <br />
+                <Form.Field className="form-inputs">
+                  <input
+                    id="description"
+                    placeholder="Description"
+                    autoComplete="off"
+                    autoCorrect="off"
+                    value={this.state.description}
+                    onChange={this.handleChange}
+                  />
+                </Form.Field>
+                <br />
+                <Form.Field className="form-inputs">
+                  <Input action>
+                    <input
+                      id="ethAddress"
+                      placeholder="0x0"
+                      autoComplete="off"
+                      autoCorrect="off"
+                      value={this.state.ethAddress}
+                      onChange={this.handleChange}
+                    />
+                    <Button
+                      type="button"
+                      content="QR"
+                      icon="qrcode"
+                      onClick={() => this.setState({ scanQR: true })}
+                    />
+                  </Input>
+                </Form.Field>
+                <br />
+                <Form.Field className="form-inputs">
+                  <Dropdown
+                    placeholder="Select Role"
+                    fluid
+                    selection
+                    options={this.roleOptions}
+                    onChange={this.handleDropdownSelect}
+                  />
+                </Form.Field>
+                <br />
+                <Message
+                  error
+                  header="Oops!!"
+                  content={this.state.errorMessage}
                 />
-              </Form.Field>
-              <br />
-              <Form.Field className="form-inputs">
-                <input
-                  id="location"
-                  placeholder="Location"
-                  autoComplete="off"
-                  autoCorrect="off"
-                  value={this.state.location}
-                  onChange={this.handleChange}
-                />
-              </Form.Field>
-              <br />
-              <Form.Field className="form-inputs">
-                <input
-                  id="description"
-                  placeholder="Description"
-                  autoComplete="off"
-                  autoCorrect="off"
-                  value={this.state.description}
-                  onChange={this.handleChange}
-                />
-              </Form.Field>
-              <br />
-              <Form.Field className="form-inputs">
-                <input
-                  id="ethAddress"
-                  placeholder="0x0"
-                  autoComplete="off"
-                  autoCorrect="off"
-                  value={this.state.ethAddress}
-                  onChange={this.handleChange}
-                />
-              </Form.Field>
-              <br />
-              <Form.Field className="form-inputs">
-                <Dropdown
-                  placeholder="Select Role"
-                  fluid
-                  selection
-                  options={this.roleOptions}
-                  onChange={this.handleDropdownSelect}
-                />
-              </Form.Field>
-              <br />
-              <Message
-                error
-                header="Oops!!"
-                content={this.state.errorMessage}
-              />
-              <br />
-              <div className="button-holder">
-                <Button
-                  className="button-css"
-                  type="submit"
-                  onClick={this.handleSubmit}
-                  loading={this.state.loading}
-                >
-                  Register
-                </Button>
-              </div>
-            </Form>
-          </Card.Content>
-        </Card>
-      </div>
+                <br />
+                <div className="button-holder">
+                  <Button
+                    className="button-css"
+                    type="submit"
+                    onClick={this.handleSubmit}
+                    loading={this.state.loading}
+                  >
+                    Register
+                  </Button>
+                </div>
+              </Form>
+            </Card.Content>
+          </Card>
+        </div>
+      </>
     );
   }
 }
