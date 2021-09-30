@@ -142,7 +142,7 @@ contract Employee {
   }
 
   function deleteSkill(string memory _name) public OnlyEmployee {
-    skillmap[_name].visible = false;
+    skillmap[_name].visible = !skillmap[_name].visible;
   }
 
   /*********************************************************CERTIFICATION SECTION**********************************************************/

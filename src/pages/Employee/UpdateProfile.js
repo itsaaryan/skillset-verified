@@ -97,6 +97,7 @@ export default class UpdateProfile extends Component {
         endorsed: certi[3],
         endorser_address: certi[4],
         review: certi[5],
+        visible: certi[6],
       });
       return;
     });
@@ -465,7 +466,7 @@ export default class UpdateProfile extends Component {
                   <br />
                   {this.state.skills?.map((skill, index) => (
                     <div>
-                      <SkillCard skill={skill} key={index} />
+                      <SkillCard skill={skill} key={index} update />
                     </div>
                   ))}
                 </Card.Content>
