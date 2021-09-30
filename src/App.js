@@ -15,6 +15,7 @@ import Organization from "./pages/OrganizationEndorser/Organization";
 import EndorseSkill from "./pages/OrganizationEndorser/EndorseSkill";
 import Endorse from "./pages/OrganizationEndorser/EndorseSection";
 import Navbar from "./components/Navbar";
+import GetEmployee from "./pages/GetRoutes/GetEmployee";
 
 export default class App extends Component {
   state = {
@@ -73,7 +74,7 @@ export default class App extends Component {
 
   adminRoutes = () => {
     return (
-      <Switch>
+      <>
         <Route path="/" exact component={AllEmployees} />
         <Route
           path="/all-organization-endorser"
@@ -81,26 +82,26 @@ export default class App extends Component {
           component={AllOrganizationEndorser}
         />
         <Route path="/create-user" exact component={AdminPageCreate} />
-      </Switch>
+      </>
     );
   };
 
   employeeRoutes = () => {
     return (
-      <Switch>
+      <>
         <Route path="/" exact component={EmployeePage} />
         <Route pth="/update-profile" exact component={UpdateProfile} />
-      </Switch>
+      </>
     );
   };
 
   isOrganizationEndorserRoutes = () => {
     return (
-      <Switch>
+      <>
         <Route path="/" exact component={Organization} />
         <Route path="/endorse-skill" exact component={EndorseSkill} />
         <Route path="/endorse-section" exact component={Endorse} />
-      </Switch>
+      </>
     );
   };
 
@@ -120,7 +121,14 @@ export default class App extends Component {
         <Navbar />
         <Container>
           <ToastContainer />
-          {this.renderRoutes()}
+          <Switch>
+            <Route
+              path="/getemployee/:employee_address"
+              exact
+              component={GetEmployee}
+            />
+            {this.renderRoutes()}
+          </Switch>
         </Container>
       </BrowserRouter>
     ) : (

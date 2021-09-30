@@ -3,6 +3,7 @@ import { Button, Card, Form, Message } from "semantic-ui-react";
 import "./EndorsePage.css";
 import Admin from "../../abis/Admin.json";
 import Employee from "../../abis/Employee.json";
+import Skills from "../../abis/Skills.json";
 import { toast } from "react-toastify";
 
 export default class EndorseSkil extends Component {
@@ -38,9 +39,11 @@ export default class EndorseSkil extends Component {
     const web3 = window.web3;
     const networkId = await web3.eth.net.getId();
     const AdminData = await Admin.networks[networkId];
+    const SkillData = await Skills.networks[networkId];
     const accounts = await web3.eth.getAccounts();
-    if (AdminData) {
+    if (AdminData && SkillData) {
       const admin = await new web3.eth.Contract(Admin.abi, AdminData.address);
+      const skills = await new web3.eth.Contract(Skills.abi, SkillData.address);
       const employeeContractAddress = await admin?.methods
         ?.getEmployeeContractByAddress(employee_address_skill)
         .call();
@@ -48,14 +51,16 @@ export default class EndorseSkil extends Component {
         Employee.abi,
         employeeContractAddress
       );
-      console.log(employeeContractAddress, EmployeeContract);
+
       try {
         await EmployeeContract.methods
           .endorseSkill(skill_name, skill_score, skill_review)
           .send({
             from: accounts[0],
           });
-
+        await skills?.methods
+          ?.addEmployeeToSkill(skill_name, employee_address_skill)
+          .send({ from: accounts[0] });
         toast.success("Skill Endorsed successfully!!");
       } catch (err) {
         this.setState({ skillError: err.message });

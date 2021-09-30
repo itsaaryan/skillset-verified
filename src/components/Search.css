@@ -1,0 +1,16 @@
+.searchbar > .results > .result > .content > .title {
+  float: right !important;
+  font-weight: 400 !important;
+}
+
+.search-ele {
+  color: black;
+}
+
+.search-ele > div:nth-child(1) > span {
+  display: block;
+}
+
+.search-ele > small {
+  display: block;
+}

@@ -16,7 +16,7 @@ export default class AllEmployees extends Component {
     if (AdminData) {
       const admin = await new web3.eth.Contract(Admin.abi, AdminData.address);
       const employeeCount = await admin?.methods.employeeCount().call();
-      console.log(employeeCount);
+
       const employees = await Promise.all(
         Array(parseInt(employeeCount))
           .fill()

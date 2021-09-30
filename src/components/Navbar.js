@@ -121,7 +121,7 @@ class Navbar extends Component {
               />
               <Menu.Item
                 as={Link}
-                to="/update=profile"
+                to="/update-profile"
                 name="Update Profile"
                 active={activeItem === "Update Profile"}
                 onClick={this.handleItemClick}
