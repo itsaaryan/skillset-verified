@@ -7,6 +7,7 @@ import LineChart from "../../components/LineChart";
 import SkillCard from "../../components/SkillCard";
 import "./Employee.css";
 import { buildStyles, CircularProgressbar } from "react-circular-progressbar";
+import CodeforcesGraph from "../../components/CodeforcesGraph";
 
 export default class EmployeePage extends Component {
   state = {
@@ -18,6 +19,7 @@ export default class EmployeePage extends Component {
     educations: [],
     colour: ["#b6e498", "#61dafb", "#764abc", "#83cd29", "#00d1b2"],
     readmore: false,
+    codeforces_res: [],
   };
 
   componentDidMount = async () => {
@@ -253,6 +255,12 @@ export default class EmployeePage extends Component {
                       ))}
                     </div>
                   </div>
+                </Card.Content>
+              </Card>
+              <Card className="employee-des">
+                <Card.Content>
+                  <Card.Header>Competetive Platform Ratings</Card.Header>
+                  <CodeforcesGraph />
                 </Card.Content>
               </Card>
             </Grid.Column>

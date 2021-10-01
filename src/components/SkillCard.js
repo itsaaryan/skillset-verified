@@ -44,7 +44,7 @@ export default class SkillCard extends Component {
             className="delete-button-skill"
             onClick={(e) => this.removeSkill(skill.name)}
           >
-            {skill.visible ? (
+            {!skill.visible ? (
               <i class="fas fa-eye-slash"></i>
             ) : (
               <i class="fas fa-eye"></i>
