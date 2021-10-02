@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import { Card, CardContent } from "semantic-ui-react";
-
 import Employee from "../abis/Employee.json";
 import Admin from "../abis/Admin.json";
 import { buildStyles, CircularProgressbar } from "react-circular-progressbar";
@@ -57,7 +56,7 @@ export default class SkillCard extends Component {
               <Card.Header style={{ fontSize: "18px", fontWeight: "600" }}>
                 {skill.name}
                 <br />
-                <small>{skill.experience}</small>
+                <small style={{ color: "#c5c6c7" }}>{skill.experience}</small>
               </Card.Header>
 
               <br />
@@ -66,7 +65,9 @@ export default class SkillCard extends Component {
                   <div>
                     <em>Endorsed By:</em>
                     <p>
-                      <small style={{ wordBreak: "break-word" }}>
+                      <small
+                        style={{ wordBreak: "break-word", color: "#c5c6c7" }}
+                      >
                         {skill.endorser_address}
                       </small>
                     </p>
@@ -75,7 +76,7 @@ export default class SkillCard extends Component {
                   <div>
                     <em>Review: </em>
                     <p>
-                      <small>{skill.review}</small>
+                      <small style={{ color: "#c5c6c7" }}>{skill.review}</small>
                     </p>
                   </div>
                 </div>
@@ -89,7 +90,7 @@ export default class SkillCard extends Component {
               <div style={{ width: "100px" }}>
                 <CircularProgressbar
                   value={skill.overall_percentage}
-                  text={`Score - ${skill.overall_percentage}%`}
+                  text={`Acquired - ${skill.overall_percentage}%`}
                   strokeWidth="5"
                   styles={buildStyles({
                     strokeLinecap: "round",
@@ -98,9 +99,9 @@ export default class SkillCard extends Component {
                     pathColor: `${
                       this.state.colour[Math.floor(Math.random() * 5)]
                     }`,
-                    textColor: "#66fcf1",
+                    textColor: "#c5c6c7",
                     trailColor: "#393b3fa6",
-                    backgroundColor: "#66fcf1",
+                    backgroundColor: "#c5c6c7",
                   })}
                 />
               </div>

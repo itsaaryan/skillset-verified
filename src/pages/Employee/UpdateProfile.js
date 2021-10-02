@@ -13,6 +13,8 @@ import GetWorkExpModal from "../../components/GetWorkExpModal";
 import GetSkillsModal from "../../components/GetSkillsModals";
 import GetEducationModal from "../../components/GetEducationModal";
 import GetEditFieldModal from "../../components/GetEditFieldModal";
+import LoadComp from "../../components/LoadComp";
+import CodeforcesGraph from "../../components/CodeforcesGraph";
 
 export default class UpdateProfile extends Component {
   state = {
@@ -30,9 +32,11 @@ export default class UpdateProfile extends Component {
     educationmodal: false,
     editFieldModal: false,
     isDescription: false,
+    loadcomp: false,
   };
 
   componentDidMount = async () => {
+    this.setState({ loadcomp: true });
     const web3 = window.web3;
     const networkId = await web3.eth.net.getId();
     const AdminData = await Admin.networks[networkId];
@@ -76,6 +80,7 @@ export default class UpdateProfile extends Component {
     } else {
       toast.error("The Admin Contract does not exist on this network!");
     }
+    this.setState({ loadcomp: false });
   };
 
   getSkills = async (EmployeeContract) => {
@@ -123,6 +128,7 @@ export default class UpdateProfile extends Component {
         organization: certi[1],
         score: certi[2],
         endorsed: certi[3],
+        visible: certi[4],
       });
       return;
     });
@@ -150,6 +156,7 @@ export default class UpdateProfile extends Component {
         enddate: work[3],
         endorsed: work[4],
         description: work[5],
+        visible: work[6],
       });
       return;
     });
@@ -202,8 +209,56 @@ export default class UpdateProfile extends Component {
     this.setState({ editFieldModal: false });
   };
 
+  certificationVisibility = async (name) => {
+    const web3 = window.web3;
+    const networkId = await web3.eth.net.getId();
+    const AdminData = await Admin.networks[networkId];
+    const accounts = await web3.eth.getAccounts();
+    if (AdminData) {
+      const admin = await new web3.eth.Contract(Admin.abi, AdminData.address);
+      const employeeContractAddress = await admin?.methods
+        ?.getEmployeeContractByAddress(accounts[0])
+        .call();
+      const EmployeeContract = await new web3.eth.Contract(
+        Employee.abi,
+        employeeContractAddress
+      );
+      await EmployeeContract?.methods
+        ?.deleteCertification(name)
+        .send({ from: accounts[0] });
+      toast.success("Certification visibility changed successfully!!");
+    } else {
+      toast.error("The Admin Contract does not exist on this network!");
+    }
+  };
+
+  workExpVisibility = async (org) => {
+    const web3 = window.web3;
+    const networkId = await web3.eth.net.getId();
+    const AdminData = await Admin.networks[networkId];
+    const accounts = await web3.eth.getAccounts();
+    if (AdminData) {
+      const admin = await new web3.eth.Contract(Admin.abi, AdminData.address);
+      const employeeContractAddress = await admin?.methods
+        ?.getEmployeeContractByAddress(accounts[0])
+        .call();
+      const EmployeeContract = await new web3.eth.Contract(
+        Employee.abi,
+        employeeContractAddress
+      );
+      await EmployeeContract?.methods
+        ?.deleteWorkExp(org)
+        .send({ from: accounts[0] });
+      toast.success("Work Exp. visibility changed successfully!!");
+    } else {
+      toast.error("The Admin Contract does not exist on this network!");
+    }
+  };
+
   render() {
-    return (
+    return this.state.loadcomp ? (
+      <LoadComp />
+    ) : (
       <div>
         <GetCertificationModal
           isOpen={this.state.certificationModal}
@@ -251,7 +306,9 @@ export default class UpdateProfile extends Component {
                         <i class="fas fa-pencil-alt"></i>
                       </span>
                     </div>
-                    <small style={{ wordBreak: "break-word" }}>
+                    <small
+                      style={{ wordBreak: "break-word", color: "#c5c6c7" }}
+                    >
                       {this.state.employeedata?.ethAddress}
                     </small>
                   </Card.Header>
@@ -259,7 +316,9 @@ export default class UpdateProfile extends Component {
                   <div>
                     <p>
                       <em>Location: </em>
-                      {this.state.employeedata?.location}
+                      <span style={{ color: "#c5c6c7" }}>
+                        {this.state.employeedata?.location}
+                      </span>
                     </p>
                   </div>
                   <br />
@@ -292,7 +351,9 @@ export default class UpdateProfile extends Component {
                     </div>
                   </Card.Header>
                   <div>
-                    <p>{this.state.employeedata?.description}</p>
+                    <p style={{ color: "#c5c6c7" }}>
+                      {this.state.employeedata?.description}
+                    </p>
                   </div>
                   <br />
                   <div>
@@ -316,14 +377,16 @@ export default class UpdateProfile extends Component {
                     <div className="education">
                       {this.state.educations?.map((education, index) => (
                         <div className="education-design" key={index}>
-                          <div>
+                          <div
+                            style={{ paddingRight: "50px", color: "#c5c6c7" }}
+                          >
                             <p>{education.description}</p>
                             <small style={{ wordBreak: "break-word" }}>
                               {education.institute}
                             </small>
                           </div>
                           <div>
-                            <small>
+                            <small style={{ color: "#c5c6c7" }}>
                               <em>
                                 {education.startdate} - {education.enddate}
                               </em>
@@ -347,6 +410,12 @@ export default class UpdateProfile extends Component {
                   </div>
                 </Card.Content>
               </Card>
+              <Card className="employee-des">
+                <Card.Content>
+                  <Card.Header>Competetive Platform Ratings</Card.Header>
+                  <CodeforcesGraph />
+                </Card.Content>
+              </Card>
             </Grid.Column>
             <Grid.Column width={10}>
               <Card className="employee-des">
@@ -367,8 +436,22 @@ export default class UpdateProfile extends Component {
                   <div>
                     {this.state.certifications?.map((certi, index) => (
                       <div key={index} className="certification-container">
-                        <div>
-                          <p>{certi.name}</p>
+                        <div style={{ color: "#c5c6c7" }}>
+                          <p>
+                            {certi.name}
+                            <span
+                              className="delete-button-visiblility"
+                              onClick={(e) =>
+                                this.certificationVisibility(certi.name)
+                              }
+                            >
+                              {!certi.visible ? (
+                                <i class="fas fa-eye-slash"></i>
+                              ) : (
+                                <i class="fas fa-eye"></i>
+                              )}
+                            </span>
+                          </p>
                           <small style={{ wordBreak: "break-word" }}>
                             {certi.organization}
                           </small>
@@ -391,12 +474,12 @@ export default class UpdateProfile extends Component {
                                 strokeLinecap: "round",
                                 textSize: "12px",
                                 pathTransitionDuration: 1,
-                                pathColor: `rgba(102,252,241, ${
+                                pathColor: `rgba(255,255,255, ${
                                   certi.score / 100
                                 })`,
-                                textColor: "#66fcf1",
+                                textColor: "#c5c6c7",
                                 trailColor: "#393b3fa6",
-                                backgroundColor: "#66fcf1",
+                                backgroundColor: "#c5c6c7",
                               })}
                             />
                           </div>
@@ -423,14 +506,28 @@ export default class UpdateProfile extends Component {
                   <div className="education">
                     {this.state.workExps?.map((workExp, index) => (
                       <div className="education-design" key={index}>
-                        <div>
-                          <p>{workExp.role}</p>
+                        <div style={{ color: "#c5c6c7" }}>
+                          <p>
+                            {workExp.role}
+                            <span
+                              className="delete-button-visiblility"
+                              onClick={(e) =>
+                                this.workExpVisibility(workExp.organization)
+                              }
+                            >
+                              {!workExp.visible ? (
+                                <i class="fas fa-eye-slash"></i>
+                              ) : (
+                                <i class="fas fa-eye"></i>
+                              )}
+                            </span>
+                          </p>
                           <small style={{ wordBreak: "break-word" }}>
                             {workExp.organization}
                           </small>
                         </div>
                         <div>
-                          <small>
+                          <small style={{ color: "#c5c6c7" }}>
                             <em>
                               {workExp.startdate} - {workExp.enddate}
                             </em>

@@ -51,8 +51,8 @@ function CodeforcesGraph() {
                 {
                   label: "Ratings",
                   data: newarr,
-                  backgroundColor: "#45a29e",
-                  borderColor: "rgba(69,162,158,0.2)",
+                  backgroundColor: "white",
+                  borderColor: "rgba(255,255,255,0.3)",
                   fill: false,
                 },
               ],
@@ -72,8 +72,9 @@ function CodeforcesGraph() {
   return (
     <>
       <br />
-      <p>
-        Codeforces Ratings: {mxRating}{" "}
+      <p style={{ color: "#c5c6c7" }}>
+        Codeforces Ratings:{" "}
+        <p style={{ color: "white", display: "inline" }}>{mxRating}</p>{" "}
         <i>
           <small>(max-rating)</small>
         </i>

@@ -14,11 +14,11 @@ export default class LineChart extends Component {
         labels: [...Array(this.props.overallEndorsement?.length).keys()],
         datasets: [
           {
-            label: "Endorse Spread",
+            label: "Endorse Rating Spread",
             data: this.props.overallEndorsement,
             fill: false,
-            backgroundColor: "#45a29e",
-            borderColor: "rgba(69,162,158,0.2)",
+            backgroundColor: "white",
+            borderColor: "rgba(255,255,255,0.3)",
           },
         ],
       };

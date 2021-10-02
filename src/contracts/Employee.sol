@@ -217,7 +217,7 @@ contract Employee {
   }
 
   function deleteCertification(string memory _name) public OnlyEmployee {
-    certificationmap[_name].visible = false;
+    certificationmap[_name].visible = !certificationmap[_name].visible;
   }
 
   /********************************************************************Work Experience Section********************************************************************/
@@ -304,7 +304,7 @@ contract Employee {
   }
 
   function deleteWorkExp(address org) public OnlyEmployee {
-    workexpmap[org].visible = false;
+    workexpmap[org].visible = !workexpmap[org].visible;
   }
 
   /********************************************************************Education Section********************************************************************/
