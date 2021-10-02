@@ -143,7 +143,7 @@ export default class Endorse extends Component {
                     <Input action>
                       <input
                         id="employee_address"
-                        placeholder="0x0"
+                        placeholder="Employee Address"
                         autoComplete="off"
                         autoCorrect="off"
                         value={this.state.employee_address}

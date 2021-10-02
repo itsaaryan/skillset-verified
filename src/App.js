@@ -16,6 +16,7 @@ import EndorseSkill from "./pages/OrganizationEndorser/EndorseSkill";
 import Endorse from "./pages/OrganizationEndorser/EndorseSection";
 import Navbar from "./components/Navbar";
 import GetEmployee from "./pages/GetRoutes/GetEmployee";
+import GetOrg from "./pages/GetRoutes/GetOrg";
 
 export default class App extends Component {
   state = {
@@ -127,6 +128,7 @@ export default class App extends Component {
               exact
               component={GetEmployee}
             />
+            <Route path="/getOrg/:orgAddress" exact component={GetOrg} />
             {this.renderRoutes()}
           </Switch>
         </Container>

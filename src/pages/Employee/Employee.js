@@ -376,15 +376,17 @@ export default class EmployeePage extends Component {
                 <Card.Content>
                   <Card.Header>Skills</Card.Header>
                   <br />
-                  {this.state.skills?.map((skill, index) =>
-                    skill.visible ? (
-                      <div>
-                        <SkillCard skill={skill} key={index} />
-                      </div>
-                    ) : (
-                      <></>
-                    )
-                  )}
+                  <div className="skill-height-container">
+                    {this.state.skills?.map((skill, index) =>
+                      skill.visible ? (
+                        <div>
+                          <SkillCard skill={skill} key={index} />
+                        </div>
+                      ) : (
+                        <></>
+                      )
+                    )}
+                  </div>
                 </Card.Content>
               </Card>
             </Grid.Column>

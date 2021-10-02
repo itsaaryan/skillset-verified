@@ -29,6 +29,7 @@ export default class SkillCard extends Component {
         ?.deleteSkill(name)
         .send({ from: accounts[0] });
       toast.success("Skill deleted successfully!!");
+      window.location.reload(false);
     } else {
       toast.error("The Admin Contract does not exist on this network!");
     }

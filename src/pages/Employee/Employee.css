@@ -47,3 +47,8 @@
   justify-content: space-between;
   margin-bottom: 18px;
 }
+
+.skill-height-container {
+  max-height: 20rem;
+  overflow: auto;
+}

@@ -4,11 +4,11 @@ import Admin from "../../abis/Admin.json";
 import { toast } from "react-toastify";
 import OrgEndCard from "../../components/OrgEndCard";
 import EmployeeCard from "../../components/EmployeeCard";
-import "./Organization.css";
-import GetEmployeeModal from "../../components/GetEmployeeModal";
+import "./GetOrg.css";
 import LoadComp from "../../components/LoadComp";
+import { withRouter } from "react-router-dom";
 
-export default class OrganizationEndorser extends Component {
+class GetOrg extends Component {
   state = {
     orgcontractAddress: "",
     employees: [],
@@ -26,11 +26,15 @@ export default class OrganizationEndorser extends Component {
     const web3 = window.web3;
     const networkId = await web3.eth.net.getId();
     const AdminData = await Admin.networks[networkId];
-    const accounts = await web3.eth.getAccounts();
+    const orgAddress = this.props.match.params.orgAddress;
+    if (!orgAddress) {
+      this.props.history.push("/");
+      return;
+    }
     if (AdminData) {
       const admin = await new web3.eth.Contract(Admin.abi, AdminData.address);
       const orgContractAddress = await admin?.methods
-        ?.getOrganizationContractByAddress(accounts[0])
+        ?.getOrganizationContractByAddress(orgAddress)
         .call();
       const orgContract = await new web3.eth.Contract(
         Organization.abi,
@@ -49,7 +53,6 @@ export default class OrganizationEndorser extends Component {
             return admin.methods.getEmployeeContractByAddress(employee).call();
           })
       );
-      // console.log("emp", employees);
 
       this.setState({ orgContractAddress, employees });
     } else {
@@ -57,20 +60,11 @@ export default class OrganizationEndorser extends Component {
     }
   };
 
-  closeEmployeeModal = () => {
-    this.setState({ employeemodal: false });
-    this.getEmployees();
-  };
-
   render() {
     return this.state.loadcomp ? (
       <LoadComp />
     ) : (
       <div>
-        <GetEmployeeModal
-          isOpen={this.state.employeemodal}
-          closeEmployeeModal={this.closeEmployeeModal}
-        />
         {this.state.orgContractAddress && (
           <OrgEndCard OrgEndContractAddress={this.state.orgContractAddress} />
         )}
@@ -79,16 +73,6 @@ export default class OrganizationEndorser extends Component {
           <div
             style={{ width: "68%", marginLeft: "auto", marginRight: "auto" }}
           >
-            <span
-              className="add-employee"
-              onClick={(e) =>
-                this.setState({
-                  employeemodal: !this.state.employeemodal,
-                })
-              }
-            >
-              <span class="fas fa-plus">&nbsp;Add Employee</span>
-            </span>
             <h2 className="org-card-heading">Employees in the organization</h2>
           </div>
           <br />
@@ -101,3 +85,5 @@ export default class OrganizationEndorser extends Component {
     );
   }
 }
+
+export default withRouter(GetOrg);

@@ -6,6 +6,8 @@ import LineChart from "../../components/LineChart";
 import SkillCard from "../../components/SkillCard";
 import "./Employee.css";
 import { buildStyles, CircularProgressbar } from "react-circular-progressbar";
+import LoadComp from "../../components/LoadComp";
+import CodeforcesGraph from "../../components/CodeforcesGraph";
 
 export default class GetEmployee extends Component {
   state = {
@@ -17,9 +19,11 @@ export default class GetEmployee extends Component {
     educations: [],
     colour: ["#b6e498", "#61dafb", "#764abc", "#83cd29", "#00d1b2"],
     readmore: false,
+    loadcomp: false,
   };
 
   componentDidMount = async () => {
+    this.setState({ loadcomp: true });
     const employee_address = this.props?.match?.params?.employee_address;
     const web3 = window.web3;
     const EmployeeContract = await new web3.eth.Contract(
@@ -49,7 +53,11 @@ export default class GetEmployee extends Component {
           EmployeeContract?.methods?.overallEndorsement(index).call()
         )
     );
-    this.setState({ employeedata: newEmployedata, overallEndorsement });
+    this.setState({
+      employeedata: newEmployedata,
+      overallEndorsement,
+      loadcomp: false,
+    });
   };
 
   getSkills = async (EmployeeContract) => {
@@ -71,6 +79,7 @@ export default class GetEmployee extends Component {
         endorsed: certi[3],
         endorser_address: certi[4],
         review: certi[5],
+        visible: certi[6],
       });
       return;
     });
@@ -96,6 +105,7 @@ export default class GetEmployee extends Component {
         organization: certi[1],
         score: certi[2],
         endorsed: certi[3],
+        visible: certi[4],
       });
       return;
     });
@@ -123,6 +133,7 @@ export default class GetEmployee extends Component {
         enddate: work[3],
         endorsed: work[4],
         description: work[5],
+        visible: work[6],
       });
       return;
     });
@@ -156,7 +167,9 @@ export default class GetEmployee extends Component {
   };
 
   render() {
-    return (
+    return this.state.loadcomp ? (
+      <LoadComp />
+    ) : (
       <div>
         <Grid>
           <Grid.Row>
@@ -165,7 +178,9 @@ export default class GetEmployee extends Component {
                 <Card.Content>
                   <Card.Header>
                     {this.state.employeedata?.name}
-                    <small style={{ wordBreak: "break-word" }}>
+                    <small
+                      style={{ wordBreak: "break-word", color: "#c5c6c7" }}
+                    >
                       {this.state.employeedata?.ethAddress}
                     </small>
                   </Card.Header>
@@ -173,7 +188,9 @@ export default class GetEmployee extends Component {
                   <div>
                     <p>
                       <em>Location: </em>
-                      {this.state.employeedata?.location}
+                      <span style={{ color: "#c5c6c7" }}>
+                        {this.state.employeedata?.location}
+                      </span>
                     </p>
                   </div>
                   <br />
@@ -189,22 +206,26 @@ export default class GetEmployee extends Component {
               </Card>
               <Card className="employee-des">
                 <Card.Content>
-                  <Card.Header>About</Card.Header>
+                  <Card.Header>About:</Card.Header>
                   <div>
-                    <p>{this.state.employeedata?.description}</p>
+                    <p style={{ color: "#c5c6c7" }}>
+                      {this.state.employeedata?.description}
+                    </p>
                   </div>
                   <br />
                   <div>
                     <Card.Header
                       style={{ fontSize: "19px", fontWeight: "600" }}
                     >
-                      Education
+                      Education:
                     </Card.Header>
                     <br />
                     <div className="education">
                       {this.state.educations?.map((education, index) => (
                         <div className="education-design" key={index}>
-                          <div style={{ paddingRight: "50px" }}>
+                          <div
+                            style={{ paddingRight: "50px", color: "#c5c6c7" }}
+                          >
                             <p>{education.description}</p>
                             <small
                               style={{
@@ -216,7 +237,7 @@ export default class GetEmployee extends Component {
                             </small>
                           </div>
                           <div>
-                            <small>
+                            <small style={{ color: "#c5c6c7" }}>
                               <em>
                                 {education.startdate} - {education.enddate}
                               </em>
@@ -240,6 +261,12 @@ export default class GetEmployee extends Component {
                   </div>
                 </Card.Content>
               </Card>
+              <Card className="employee-des">
+                <Card.Content>
+                  <Card.Header>Competetive Platform Ratings</Card.Header>
+                  <CodeforcesGraph />
+                </Card.Content>
+              </Card>
             </Grid.Column>
             <Grid.Column width={10}>
               <Card className="employee-des">
@@ -247,44 +274,49 @@ export default class GetEmployee extends Component {
                   <Card.Header>Certifications</Card.Header>
                   <br />
                   <div>
-                    {this.state.certifications?.map((certi, index) => (
-                      <div key={index} className="certification-container">
-                        <div>
-                          <p>{certi.name}</p>
-                          <small style={{ wordBreak: "break-word" }}>
-                            {certi.organization}
-                          </small>
-                          <p
-                            style={{
-                              color: certi.endorsed ? "#00d1b2" : "yellow",
-                              opacity: "0.7",
-                            }}
-                          >
-                            {certi.endorsed ? "Endorsed" : "Not Yet Endorsed"}
-                          </p>
-                        </div>
-                        <div>
-                          <div style={{ width: "100px" }}>
-                            <CircularProgressbar
-                              value={certi.score}
-                              text={`Score - ${certi.score}%`}
-                              strokeWidth="5"
-                              styles={buildStyles({
-                                strokeLinecap: "round",
-                                textSize: "12px",
-                                pathTransitionDuration: 1,
-                                pathColor: `rgba(102,252,241, ${
-                                  certi.score / 100
-                                })`,
-                                textColor: "#66fcf1",
-                                trailColor: "#393b3fa6",
-                                backgroundColor: "#66fcf1",
-                              })}
-                            />
+                    {this.state.certifications?.map(
+                      (certi, index) =>
+                        certi.visible && (
+                          <div key={index} className="certification-container">
+                            <div style={{ color: "#c5c6c7" }}>
+                              <p>{certi.name}</p>
+                              <small style={{ wordBreak: "break-word" }}>
+                                {certi.organization}
+                              </small>
+                              <p
+                                style={{
+                                  color: certi.endorsed ? "#00d1b2" : "yellow",
+                                  opacity: "0.7",
+                                }}
+                              >
+                                {certi.endorsed
+                                  ? "Endorsed"
+                                  : "Not Yet Endorsed"}
+                              </p>
+                            </div>
+                            <div>
+                              <div style={{ width: "100px" }}>
+                                <CircularProgressbar
+                                  value={certi.score}
+                                  text={`Score - ${certi.score}%`}
+                                  strokeWidth="5"
+                                  styles={buildStyles({
+                                    strokeLinecap: "round",
+                                    textSize: "12px",
+                                    pathTransitionDuration: 1,
+                                    pathColor: `rgba(255,255,255, ${
+                                      certi.score / 100
+                                    })`,
+                                    textColor: "#c5c6c7",
+                                    trailColor: "#393b3fa6",
+                                    backgroundColor: "#c5c6c7",
+                                  })}
+                                />
+                              </div>
+                            </div>
                           </div>
-                        </div>
-                      </div>
-                    ))}
+                        )
+                    )}
                   </div>
                 </Card.Content>
               </Card>
@@ -293,31 +325,38 @@ export default class GetEmployee extends Component {
                   <Card.Header>Work Experiences</Card.Header>
                   <br />
                   <div className="education">
-                    {this.state.workExps?.map((workExp, index) => (
-                      <div className="education-design" key={index}>
-                        <div>
-                          <p>{workExp.role}</p>
-                          <small style={{ wordBreak: "break-word" }}>
-                            {workExp.organization}
-                          </small>
-                        </div>
-                        <div>
-                          <small>
-                            <em>
-                              {workExp.startdate} - {workExp.enddate}
-                            </em>
-                          </small>
-                          <p
-                            style={{
-                              color: workExp.endorsed ? "#00d1b2" : "yellow",
-                              opacity: "0.7",
-                            }}
-                          >
-                            {workExp.endorsed ? "Endorsed" : "Not Yet Endorsed"}
-                          </p>
-                        </div>
-                      </div>
-                    ))}
+                    {this.state.workExps?.map(
+                      (workExp, index) =>
+                        workExp.visible && (
+                          <div className="education-design" key={index}>
+                            <div style={{ color: "#c5c6c7" }}>
+                              <p>{workExp.role}</p>
+                              <small style={{ wordBreak: "break-word" }}>
+                                {workExp.organization}
+                              </small>
+                            </div>
+                            <div>
+                              <small>
+                                <em>
+                                  {workExp.startdate} - {workExp.enddate}
+                                </em>
+                              </small>
+                              <p
+                                style={{
+                                  color: workExp.endorsed
+                                    ? "#00d1b2"
+                                    : "yellow",
+                                  opacity: "0.7",
+                                }}
+                              >
+                                {workExp.endorsed
+                                  ? "Endorsed"
+                                  : "Not Yet Endorsed"}
+                              </p>
+                            </div>
+                          </div>
+                        )
+                    )}
                   </div>
                 </Card.Content>
               </Card>
@@ -325,11 +364,17 @@ export default class GetEmployee extends Component {
                 <Card.Content>
                   <Card.Header>Skills</Card.Header>
                   <br />
-                  {this.state.skills?.map((skill, index) => (
-                    <div>
-                      <SkillCard skill={skill} key={index} />
-                    </div>
-                  ))}
+                  <div className="skill-height-container">
+                    {this.state.skills?.map((skill, index) =>
+                      skill.visible ? (
+                        <div>
+                          <SkillCard skill={skill} key={index} />
+                        </div>
+                      ) : (
+                        <></>
+                      )
+                    )}
+                  </div>
                 </Card.Content>
               </Card>
             </Grid.Column>

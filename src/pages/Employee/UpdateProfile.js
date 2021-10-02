@@ -33,6 +33,7 @@ export default class UpdateProfile extends Component {
     editFieldModal: false,
     isDescription: false,
     loadcomp: false,
+    EmployeeContract: {},
   };
 
   componentDidMount = async () => {
@@ -50,6 +51,7 @@ export default class UpdateProfile extends Component {
         Employee.abi,
         employeeContractAddress
       );
+      this.setState({ EmployeeContract });
       this.getSkills(EmployeeContract);
       this.getCertifications(EmployeeContract);
       this.getWorkExp(EmployeeContract);
@@ -191,18 +193,22 @@ export default class UpdateProfile extends Component {
 
   closeCertificationModal = () => {
     this.setState({ certificationModal: false });
+    this.getCertifications(this.state.EmployeeContract);
   };
 
   closeWorkExpModal = () => {
     this.setState({ workexpModal: false });
+    this.getWorkExp(this.state.EmployeeContract);
   };
 
   closeSkillModal = () => {
     this.setState({ skillmodal: false });
+    this.getSkills(this.state.EmployeeContract);
   };
 
   closeEducationModal = () => {
     this.setState({ educationmodal: false });
+    this.getEducation(this.state.EmployeeContract);
   };
 
   closeEditFieldModal = () => {
@@ -230,6 +236,7 @@ export default class UpdateProfile extends Component {
     } else {
       toast.error("The Admin Contract does not exist on this network!");
     }
+    this.getCertifications(this.state.EmployeeContract);
   };
 
   workExpVisibility = async (org) => {
@@ -253,6 +260,7 @@ export default class UpdateProfile extends Component {
     } else {
       toast.error("The Admin Contract does not exist on this network!");
     }
+    this.getWorkExp(this.state.EmployeeContract);
   };
 
   render() {
@@ -561,11 +569,13 @@ export default class UpdateProfile extends Component {
                   <Card.Header>Skills</Card.Header>
                   <br />
                   <br />
-                  {this.state.skills?.map((skill, index) => (
-                    <div>
-                      <SkillCard skill={skill} key={index} update />
-                    </div>
-                  ))}
+                  <div className="skill-height-container">
+                    {this.state.skills?.map((skill, index) => (
+                      <div>
+                        <SkillCard skill={skill} key={index} update />
+                      </div>
+                    ))}
+                  </div>
                 </Card.Content>
               </Card>
             </Grid.Column>
