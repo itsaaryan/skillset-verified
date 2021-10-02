@@ -1,9 +1,11 @@
 import React, { Component } from "react";
+import { withRouter } from "react-router-dom";
 import { Card } from "semantic-ui-react";
 import Employee from "../abis/Employee.json";
 import "./EmployeeCard.css";
+import LoadComp from "./LoadComp";
 
-export default class EmployeeCard extends Component {
+class EmployeeCard extends Component {
   state = {
     employeedata: {},
     skills: [],
@@ -12,9 +14,11 @@ export default class EmployeeCard extends Component {
     educations: [],
     colour: ["#b6e498", "#61dafb", "#764abc", "#83cd29", "#00d1b2"],
     readmore: false,
+    loadcomp: false,
   };
 
   componentDidMount = async () => {
+    this.setState({ loadcomp: true });
     const web3 = window.web3;
     const networkId = await web3.eth.net.getId();
     const EmployeeContract = await new web3.eth.Contract(
@@ -36,7 +40,7 @@ export default class EmployeeCard extends Component {
       overallEndorsement: employeedata[4],
       endorsecount: employeedata[5],
     };
-    this.setState({ employeedata: newEmployedata });
+    this.setState({ employeedata: newEmployedata, loadcomp: false });
   };
 
   getSkills = async (EmployeeContract) => {
@@ -142,11 +146,19 @@ export default class EmployeeCard extends Component {
     this.setState({ educations: neweducation });
   };
 
+  toEmployee = () => {
+    this.props.history.push(
+      `/getemployee/${this.props.employeeContractAddress}`
+    );
+  };
+
   render() {
-    return (
+    return this.state.loadcomp ? (
+      <LoadComp />
+    ) : (
       <Card className="employee-card">
         <Card.Content>
-          <Card.Header>
+          <Card.Header onClick={this.toEmployee} style={{ cursor: "pointer" }}>
             <span>{this.state.employeedata?.name}</span>
             <small>{this.state.employeedata.ethAddress}</small>
           </Card.Header>
@@ -154,13 +166,17 @@ export default class EmployeeCard extends Component {
           <div>
             <p>
               <em>Location : </em>
-              {this.state.employeedata?.location}
+              <span style={{ color: "#c5c6c7" }}>
+                {this.state.employeedata?.location}
+              </span>
             </p>
           </div>
           <br />
           <div>
             <em>Description :</em>
-            <p>{this.state.employeedata?.description}</p>
+            <p style={{ color: "#c5c6c7" }}>
+              {this.state.employeedata?.description}
+            </p>
           </div>
           <br />
           <div>
@@ -170,6 +186,7 @@ export default class EmployeeCard extends Component {
                 <div
                   className="skill-design"
                   style={{
+                    color: "#c5c6c7",
                     border: `1px solid ${this.state.colour[index % 5]}`,
                   }}
                 >
@@ -185,7 +202,10 @@ export default class EmployeeCard extends Component {
                 <em>Education:</em>
                 <div className="education">
                   {this.state.educations?.map((education, index) => (
-                    <div className="education-design">
+                    <div
+                      className="education-design"
+                      style={{ color: "#c5c6c7" }}
+                    >
                       <div>
                         <p>{education.description}</p>
                         <small>{education.institute}</small>
@@ -214,7 +234,10 @@ export default class EmployeeCard extends Component {
                 <em>Certifications:</em>
                 <div className="certifications">
                   {this.state.certifications?.map((certification, index) => (
-                    <div className="certification-design">
+                    <div
+                      className="certification-design"
+                      style={{ color: "#c5c6c7" }}
+                    >
                       <div>
                         <p>{certification.name}</p>
                         <small>{certification.organization}</small>
@@ -245,7 +268,10 @@ export default class EmployeeCard extends Component {
                 <em>Work Experience:</em>
                 <div className="workexp">
                   {this.state.workExps?.map((work, index) => (
-                    <div className="workexp-design">
+                    <div
+                      className="workexp-design"
+                      style={{ color: "#c5c6c7" }}
+                    >
                       <div>
                         <p>{work.role}</p>
                         <small>{work.organization}</small>
@@ -292,3 +318,5 @@ export default class EmployeeCard extends Component {
     );
   }
 }
+
+export default withRouter(EmployeeCard);

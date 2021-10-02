@@ -8,10 +8,10 @@ import {
   Input,
   Message,
 } from "semantic-ui-react";
-import "./Admin.css";
 import Admin from "../../abis/Admin.json";
 import { toast } from "react-toastify";
 import ScanQR from "../../components/ScanQR";
+import "./Admin.css";
 
 class CreateUser extends Component {
   state = {
@@ -82,7 +82,9 @@ class CreateUser extends Component {
           .registerUser(ethAddress, name, location, description, role)
           .send({ from: accounts[0] });
         toast.success("New user registered succressfully!!!!");
-        this.props.history.push("/");
+        this.props.history.push(
+          `${role === "1" ? "/" : "/all-organization-endorser"}`
+        );
         this.setState({
           name: "",
           location: "",
@@ -122,7 +124,7 @@ class CreateUser extends Component {
               <hr className="horizontal-line"></hr>
               <br></br>
               <Form error={!!this.state.errorMessage}>
-                <Form.Field className="form-inputs">
+                <Form.Field className="form-inputs-admin">
                   <input
                     id="name"
                     placeholder="Name"
@@ -133,7 +135,7 @@ class CreateUser extends Component {
                   />
                 </Form.Field>
                 <br />
-                <Form.Field className="form-inputs">
+                <Form.Field className="form-inputs-admin">
                   <input
                     id="location"
                     placeholder="Location"
@@ -144,7 +146,7 @@ class CreateUser extends Component {
                   />
                 </Form.Field>
                 <br />
-                <Form.Field className="form-inputs">
+                <Form.Field className="form-inputs-admin">
                   <input
                     id="description"
                     placeholder="Description"
@@ -155,8 +157,8 @@ class CreateUser extends Component {
                   />
                 </Form.Field>
                 <br />
-                <Form.Field className="form-inputs">
-                  <Input action>
+                <Form.Field className="form-inputs-admin">
+                  <Input action className="form-inputs-admin">
                     <input
                       id="ethAddress"
                       placeholder="0x0"
@@ -174,7 +176,7 @@ class CreateUser extends Component {
                   </Input>
                 </Form.Field>
                 <br />
-                <Form.Field className="form-inputs">
+                <Form.Field className="form-inputs-admin">
                   <Dropdown
                     placeholder="Select Role"
                     fluid
@@ -192,7 +194,7 @@ class CreateUser extends Component {
                 <br />
                 <div className="button-holder">
                   <Button
-                    className="button-css"
+                    className="button-css-admin"
                     type="submit"
                     onClick={this.handleSubmit}
                     loading={this.state.loading}

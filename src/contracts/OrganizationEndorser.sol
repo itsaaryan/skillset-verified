@@ -21,11 +21,6 @@ contract OrganizationEndorser {
     location = _location;
   }
 
-  modifier onlyOrganization() {
-    require(msg.sender == organization_address);
-    _;
-  }
-
   function getOrganizationInfo()
     public
     view
@@ -41,7 +36,8 @@ contract OrganizationEndorser {
 
   address[] allEmployees;
 
-  function addEmployees(address employee_address) public onlyOrganization {
+  function addEmployees(address employee_address) public {
+    require(msg.sender == organization_address);
     allEmployees.push(employee_address);
   }
 

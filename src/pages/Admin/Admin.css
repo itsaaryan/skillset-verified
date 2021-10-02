@@ -12,17 +12,17 @@
 
 .card-style {
   background: #1e2022ea !important;
-  border-radius: 20px !important;
+  border-radius: 7px !important;
   color: #c5c6c7 !important;
   min-width: 360px;
-  border: 1px solid #45a29e !important;
-  box-shadow: 2px 0px 5px 1px #45a29e !important;
+  border: 1px solid white !important;
+  box-shadow: 0px 0px 2px 0px white !important;
 }
 
 .card-heading {
-  font-family: "Grand Hotel", cursive !important;
-  color: #66fcf1;
-  font-size: 35px;
+  font-family: "Arvo", serif !important;
+  color: white;
+  font-size: 2rem;
   font-weight: 500;
   width: 100%;
   text-align: center;
@@ -30,79 +30,80 @@
 
 .horizontal-line {
   border: none;
-  border-top: 2px solid #45a29e;
+  border-top: 2px solid white;
 }
 
-.form-inputs > input {
-  border-radius: 20px !important;
+.form-inputs-admin > input {
+  border-radius: 7px !important;
   background: #1e2022ea !important;
-  border: 1px solid #45a29a !important;
-  box-shadow: 2px 0px 3px 1px #45a29e !important;
-  color: #66fcf1 !important;
+  border: 1px solid white !important;
+  box-shadow: 0px 0px 1px 0px white !important;
+  color: white !important;
 }
 
-.form-inputs > input::placeholder {
-  color: #66fcf1 !important;
+.form-inputs-admin > input::placeholder {
+  color: white !important;
   opacity: 0.7;
 }
 
-.form-inputs > input::selection {
-  color: #66fcf1 !important;
+.form-inputs-admin > input::selection {
+  color: white !important;
 }
 
-.form-inputs > input:focus {
-  box-shadow: 3px 0px 9px 0px #45a29e !important;
+.form-inputs-admin > input:focus {
+  box-shadow: 0px 0px 2px 0px white !important;
 }
 
 .ui.selection.dropdown {
-  border-radius: 20px !important;
+  border-radius: 7px !important;
   background: #1e2022ea !important;
-  box-shadow: 2px 0px 3px 1px #45a29e !important;
-  color: #66fcf1 !important;
+  border: 1px solid white !important;
+  box-shadow: 0px 0px 1px 0px white !important;
+  color: white !important;
 }
 
 .ui.default.dropdown:not(.button) > .text,
 .ui.dropdown:not(.button) > .default.text {
-  color: #66fcf1 !important;
+  color: white !important;
 }
 
 .ui.selection.active.dropdown .menu {
   background: #1e2022ea !important;
-  color: #66fcf1 !important;
+  color: white !important;
   border-bottom-left-radius: 20px !important;
   border-bottom-right-radius: 20px !important;
-  box-shadow: 2px 0px 3px 1px #45a29e !important;
+  box-shadow: 0px 0px 1px 0px white !important;
 }
 
 .ui.selection.dropdown .menu > .item {
-  color: #66fcf1 !important;
-  border-top: 1px solid #45a29a !important;
+  color: white !important;
+  border-top: 1px solid white !important;
 }
 
 .ui.dropdown .menu .selected.item,
 .ui.dropdown.selected {
   color: #1e2022ea !important;
-  background: #45a29e !important;
+  background: white !important;
 }
 
 .ui.selection.visible.dropdown > .text:not(.default) {
-  color: #66fcf1 !important;
+  color: white !important;
 }
 
 .button-holder {
   text-align: center;
 }
 
-.button-css {
-  border-radius: 20px !important;
-  color: #66fcf1 !important;
+.button-css-admin {
+  border-radius: 10px !important;
+  color: white !important;
   background: #1e2022ea !important;
-  border: 2px solid #45a29a !important;
-  box-shadow: 1px 0px 5px 0px #45a29a !important;
+  border: 2px solid white !important;
+  box-shadow: 0px 0px 2px 0px white !important;
   text-align: center;
 }
 
-.button-css:hover {
-  background: #66fcf1 !important;
+.button-css-admin:hover {
+  background: white !important;
   color: #1e2022ea !important;
 }

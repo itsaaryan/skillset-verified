@@ -35,7 +35,6 @@ export default class OrgEndCard extends Component {
           OrgEndContract.methods.getEmployeeByIndex(index).call()
         )
     );
-    console.log(allEmployeesInOrg);
     this.setState({ orgEndInfo, allEmployeesInOrg });
   };
 
@@ -51,19 +50,25 @@ export default class OrgEndCard extends Component {
           <div>
             <p>
               <em>Location : </em>
-              {this.state.orgEndInfo?.location}
+              <span style={{ color: "#c5c6c7" }}>
+                {this.state.orgEndInfo?.location}
+              </span>
             </p>
           </div>
           <br />
           <div>
             <em>Description :</em>
-            <p>{this.state.orgEndInfo?.description}</p>
+            <p style={{ color: "#c5c6c7" }}>
+              {this.state.orgEndInfo?.description}
+            </p>
           </div>
           <br />
           <div>
             <p>
               <em>Employee Count: </em>
-              {this.state.allEmployeesInOrg?.length}
+              <span style={{ color: "#c5c6c7" }}>
+                {this.state.allEmployeesInOrg?.length}
+              </span>
             </p>
           </div>
         </Card.Content>
