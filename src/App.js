@@ -17,6 +17,8 @@ import Endorse from "./pages/OrganizationEndorser/EndorseSection";
 import Navbar from "./components/Navbar";
 import GetEmployee from "./pages/GetRoutes/GetEmployee";
 import GetOrg from "./pages/GetRoutes/GetOrg";
+import NoRole from "./pages/NoRole/NoRole";
+import Notifications from "./pages/NoRole/Notifications";
 
 export default class App extends Component {
   state = {
@@ -106,7 +108,14 @@ export default class App extends Component {
     );
   };
 
-  noRoleRoutes = () => {};
+  noRoleRoutes = () => {
+    return (
+      <Switch>
+        <Route path="/" exact component={NoRole} />
+        <Route path="/notifications" exact component={Notifications} />
+      </Switch>
+    );
+  };
 
   renderRoutes = () => {
     if (this.state.isOwner) return this.adminRoutes();
