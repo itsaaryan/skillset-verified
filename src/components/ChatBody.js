@@ -104,6 +104,7 @@ export default class ChatBody extends Component {
               ? this.state.chats[this.state.chats.length - 1].info
               : {}
           }
+          admin={this.props.admin}
         />
         <div style={{ marginTop: "7px" }}>
           <div

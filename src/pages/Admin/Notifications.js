@@ -111,6 +111,7 @@ export default class NotificationsAdmin extends Component {
                   ethAddress={this.state.curr.ethAddress}
                   avatar={this.state.curr.avatar}
                   key={this.state.curr.ethAddress}
+                  admin
                 />
               ) : (
                 <Nochats />
