@@ -122,6 +122,13 @@ class Navbar extends Component {
                   active={activeItem === "Create User"}
                   onClick={this.handleItemClick}
                 />
+                <Menu.Item
+                  as={Link}
+                  to="/notifications"
+                  name="Notifications"
+                  active={activeItem === "Notifications"}
+                  onClick={this.handleItemClick}
+                />
               </>
             )}
             {this.state.role === 1 && (

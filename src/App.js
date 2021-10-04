@@ -19,6 +19,7 @@ import GetEmployee from "./pages/GetRoutes/GetEmployee";
 import GetOrg from "./pages/GetRoutes/GetOrg";
 import NoRole from "./pages/NoRole/NoRole";
 import Notifications from "./pages/NoRole/Notifications";
+import NotificationsAdmin from "./pages/Admin/Notifications";
 
 export default class App extends Component {
   state = {
@@ -85,6 +86,7 @@ export default class App extends Component {
           component={AllOrganizationEndorser}
         />
         <Route path="/create-user" exact component={AdminPageCreate} />
+        <Route path="/notifications" exact component={NotificationsAdmin} />
       </Switch>
     );
   };

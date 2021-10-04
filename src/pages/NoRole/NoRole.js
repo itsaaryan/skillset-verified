@@ -54,10 +54,12 @@ class NoRole extends Component {
 
   handleSubmit = async (e) => {
     e.preventDefault();
+    this.setState({ loading: true });
     const info = {
       name: this.state.name,
       description: this.state.description,
       role: this.state.role,
+      location: this.state.location,
     };
     await messageAdmin(info, this.state.message);
     this.setState({
@@ -66,6 +68,7 @@ class NoRole extends Component {
       role: "0",
       location: "",
       message: "",
+      loading: false,
     });
   };
 

@@ -2,10 +2,10 @@ import React, { Component } from "react";
 import { Table, Header, Image, Grid } from "semantic-ui-react";
 import ChatBody from "../../components/ChatBody";
 import Nochats from "../../components/NoChats";
-import "./Notifications.css";
+import "./Admin.css";
 import { db } from "../../firebase/firebase";
 
-export default class Notifications extends Component {
+export default class NotificationsAdmin extends Component {
   colour = ["b6e498", "61dafb", "764abc", "83cd29", "00d1b2"];
   state = {
     curr: {},

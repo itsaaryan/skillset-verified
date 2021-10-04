@@ -24,6 +24,33 @@ export const messageAdmin = async (info, message) => {
         receiver: owner,
         timeStamp: new Date(),
       });
+
+    const doc = await db
+      .collection("users")
+      .doc(accounts[0])
+      .collection("activechats")
+      .doc(owner)
+      .get();
+    if (!doc.exists) {
+      await db
+        .collection("users")
+        .doc(accounts[0])
+        .collection("activechats")
+        .doc(owner)
+        .set({
+          name: "Admin",
+          ethAddress: owner,
+        });
+      await db
+        .collection("users")
+        .doc(owner)
+        .collection("activechats")
+        .doc(accounts[0])
+        .set({
+          name: info.name,
+          ethAddress: accounts[0],
+        });
+    }
     toast.success("One of the admins will get back to you shortly!");
   } catch (err) {
     console.log(err);
