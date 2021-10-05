@@ -105,6 +105,8 @@ export default class ChatBody extends Component {
               : {}
           }
           admin={this.props.admin}
+          isEndorsementReq={this.props.isEndorsementReq}
+          org={this.props.org}
         />
         <div style={{ marginTop: "7px" }}>
           <div

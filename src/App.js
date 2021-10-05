@@ -20,6 +20,8 @@ import GetOrg from "./pages/GetRoutes/GetOrg";
 import NoRole from "./pages/NoRole/NoRole";
 import Notifications from "./pages/NoRole/Notifications";
 import NotificationsAdmin from "./pages/Admin/Notifications";
+import NotificationsEmployee from "./pages/Employee/Notifications";
+import NotificationsOrg from "./pages/OrganizationEndorser/Notifications";
 
 export default class App extends Component {
   state = {
@@ -95,7 +97,8 @@ export default class App extends Component {
     return (
       <Switch>
         <Route path="/" exact component={EmployeePage} />
-        <Route pth="/update-profile" exact component={UpdateProfile} />
+        <Route path="/update-profile" exact component={UpdateProfile} />
+        <Route path="/notifications" exact component={NotificationsEmployee} />
       </Switch>
     );
   };
@@ -106,6 +109,7 @@ export default class App extends Component {
         <Route path="/" exact component={Organization} />
         <Route path="/endorse-skill" exact component={EndorseSkill} />
         <Route path="/endorse-section" exact component={Endorse} />
+        <Route path="/notifications" exact component={NotificationsOrg} />
       </Switch>
     );
   };

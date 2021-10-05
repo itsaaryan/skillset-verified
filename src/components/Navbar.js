@@ -147,6 +147,13 @@ class Navbar extends Component {
                   active={activeItem === "Update Profile"}
                   onClick={this.handleItemClick}
                 />
+                <Menu.Item
+                  as={Link}
+                  to="/notifications"
+                  name="Notifications"
+                  active={activeItem === "Notifications"}
+                  onClick={this.handleItemClick}
+                />
               </>
             )}
 
@@ -171,6 +178,13 @@ class Navbar extends Component {
                   to="/endorse-section"
                   name="Endorse Section"
                   active={activeItem === "Endorse Section"}
+                  onClick={this.handleItemClick}
+                />
+                <Menu.Item
+                  as={Link}
+                  to="/notifications"
+                  name="Notifications"
+                  active={activeItem === "Notifications"}
                   onClick={this.handleItemClick}
                 />
               </>
