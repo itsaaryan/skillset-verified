@@ -12,7 +12,8 @@ class Navbar extends Component {
   state = { activeItem: "home", role: -1, account: "", showQr: false };
 
   componentDidMount = async () => {
-    const web3 = window.web3;
+    const web3 = await window.web3;
+    console.log(web3);
     const accounts = await web3.eth.getAccounts();
     if (accounts) {
       this.setState({ account: accounts[0] });

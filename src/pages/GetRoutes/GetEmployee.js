@@ -45,7 +45,7 @@ export default class GetEmployee extends Component {
       overallEndorsement: employeedata[4],
       endorsecount: employeedata[5],
     };
-    const endorseCount = await EmployeeContract.methods?.endorsecount().call();
+    const endorseCount = newEmployedata.endorsecount;
     const overallEndorsement = await Promise.all(
       Array(parseInt(endorseCount))
         .fill()

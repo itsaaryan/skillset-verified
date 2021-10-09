@@ -54,9 +54,7 @@ export default class EmployeePage extends Component {
         overallEndorsement: employeedata[4],
         endorsecount: employeedata[5],
       };
-      const endorseCount = await EmployeeContract.methods
-        ?.endorsecount()
-        .call();
+      const endorseCount = newEmployedata.endorsecount;
       const overallEndorsement = await Promise.all(
         Array(parseInt(endorseCount))
           .fill()
@@ -64,7 +62,7 @@ export default class EmployeePage extends Component {
             EmployeeContract?.methods?.overallEndorsement(index).call()
           )
       );
-      console.log(overallEndorsement);
+
       this.setState({ employeedata: newEmployedata, overallEndorsement });
     } else {
       toast.error("The Admin Contract does not exist on this network!");

@@ -49,6 +49,6 @@
 }
 
 .skill-height-container {
-  max-height: 20rem;
+  max-height: 36rem !important;
   overflow: auto;
 }
