@@ -3,7 +3,7 @@ import Employee from "../abis/Employee.json";
 import Admin from "../abis/Admin.json";
 import { toast } from "react-toastify";
 import { Dimmer, Loader } from "semantic-ui-react";
-import { Link, withRouter, Redirect } from "react-router-dom";
+import { withRouter } from "react-router-dom";
 
 class SearchEmp extends Component {
   state = {

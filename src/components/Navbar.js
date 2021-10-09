@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-import { connect } from "react-redux";
 import { withRouter } from "react-router-dom";
 import { toast } from "react-toastify";
 import { Menu, Segment, Image, Label, Icon } from "semantic-ui-react";

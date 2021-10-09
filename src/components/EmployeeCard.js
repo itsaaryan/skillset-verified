@@ -19,7 +19,6 @@ class EmployeeCard extends Component {
 
   componentDidMount = async () => {
     const web3 = window.web3;
-    const networkId = await web3.eth.net.getId();
     const EmployeeContract = await new web3.eth.Contract(
       Employee.abi,
       this.props.employeeContractAddress

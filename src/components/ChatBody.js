@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Divider, Image, Input, Loader } from "semantic-ui-react";
+import { Image, Input, Loader } from "semantic-ui-react";
 import "./ChatBody.css";
 import { db } from "../firebase/firebase";
 import GetInfoModal from "./GetInfoModal";

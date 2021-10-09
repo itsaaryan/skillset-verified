@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Segment, Button, Image, Grid } from "semantic-ui-react";
+import { Segment, Button, Image } from "semantic-ui-react";
 
 export default class MetaMaskGuide extends Component {
   render() {

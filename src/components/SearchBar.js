@@ -1,7 +1,7 @@
 import _ from "lodash";
 import React, { Component } from "react";
 import { toast } from "react-toastify";
-import { Search, Grid, Header, Segment, Dropdown } from "semantic-ui-react";
+import { Search } from "semantic-ui-react";
 import Skills from "../abis/Skills.json";
 import SearchEmp from "./SearchEmp";
 import "./Search.css";

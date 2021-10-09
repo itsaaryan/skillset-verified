@@ -78,7 +78,7 @@ class GetInfoModal extends Component {
           await EmployeeContract?.methods
             ?.endorseCertification(info.name)
             .send({ from: accounts[0] });
-        } else if (section == 3) {
+        } else if (section === 3) {
           await EmployeeContract?.methods
             ?.endorseWorkExp()
             .send({ from: accounts[0] });

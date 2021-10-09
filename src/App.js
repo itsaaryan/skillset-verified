@@ -32,24 +32,6 @@ function App() {
   const [isOwner, setisOwner] = useState(false);
   const [loadcomp, setloadcomp] = useState(false);
 
-  const loadWeb3 = async () => {
-    setisMeta(true);
-    setloadcomp(true);
-    if (window.ethereum) {
-      await window.ethereum.request({
-        method: "eth_requestAccounts",
-      });
-      window.web3 = await new Web3(window.ethereum);
-      await loadBlockChainData();
-    } else if (window.web3) {
-      window.web3 = await new Web3(window.web3.currentProvider);
-      await loadBlockChainData();
-    } else {
-      setisMeta(false);
-    }
-    setloadcomp(false);
-  };
-
   const loadBlockChainData = async () => {
     const web3 = window.web3;
     const accounts = await web3.eth.getAccounts();
@@ -75,13 +57,27 @@ function App() {
 
   useEffect(() => {
     const func = async () => {
-      await loadWeb3();
+      setisMeta(true);
+      setloadcomp(true);
+      if (window.ethereum) {
+        await window.ethereum.request({
+          method: "eth_requestAccounts",
+        });
+        window.web3 = await new Web3(window.ethereum);
+        await loadBlockChainData();
+      } else if (window.web3) {
+        window.web3 = await new Web3(window.web3.currentProvider);
+        await loadBlockChainData();
+      } else {
+        setisMeta(false);
+      }
+      setloadcomp(false);
     };
     func();
     return () => {
       //
     };
-  }, [window.web3, window.ethereum]);
+  }, []);
 
   const adminRoutes = () => {
     return (

@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-import { toast } from "react-toastify";
 import { Card, Grid } from "semantic-ui-react";
 import Employee from "../../abis/Employee.json";
 import LineChart from "../../components/LineChart";

@@ -1,14 +1,6 @@
 import React, { Component } from "react";
 import { withRouter } from "react-router-dom";
-import {
-  Button,
-  Card,
-  Dropdown,
-  Form,
-  Input,
-  Message,
-} from "semantic-ui-react";
-import { toast } from "react-toastify";
+import { Button, Card, Dropdown, Form, Message } from "semantic-ui-react";
 import "./NoRole.css";
 import { messageAdmin } from "../../firebase/api.js";
 
