@@ -1,0 +1,4 @@
+{
+  "appService.defaultWebAppToDeploy": "/subscriptions/03d5f8ae-756b-4b02-8cfc-47a30de7bfc8/resourceGroups/appsvc_linux_centralus/providers/Microsoft.Web/sites/skillset-verified",
+  "appService.deploySubpath": "build"
+}

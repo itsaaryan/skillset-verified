@@ -15,6 +15,11 @@ import GetEducationModal from "../../components/GetEducationModal";
 import GetEditFieldModal from "../../components/GetEditFieldModal";
 import LoadComp from "../../components/LoadComp";
 import CodeforcesGraph from "../../components/CodeforcesGraph";
+import {
+  reqCertiEndorsementFunc,
+  reqEducationEndorsementFunc,
+  reqWorkexpEndorsementFunc,
+} from "../../firebase/api";
 
 export default class UpdateProfile extends Component {
   state = {
@@ -67,9 +72,7 @@ export default class UpdateProfile extends Component {
         overallEndorsement: employeedata[4],
         endorsecount: employeedata[5],
       };
-      const endorseCount = await EmployeeContract.methods
-        ?.endorsecount()
-        .call();
+      const endorseCount = newEmployedata.endorsecount;
       const overallEndorsement = await Promise.all(
         Array(parseInt(endorseCount))
           .fill()
@@ -263,6 +266,18 @@ export default class UpdateProfile extends Component {
     this.getWorkExp(this.state.EmployeeContract);
   };
 
+  reqEducationEndorsement = async (education) => {
+    reqEducationEndorsementFunc(education);
+  };
+
+  reqCertiEndorsement = async (certi) => {
+    reqCertiEndorsementFunc(certi);
+  };
+
+  reqWorkexpEndorsement = async (workExp) => {
+    reqWorkexpEndorsementFunc(workExp);
+  };
+
   render() {
     return this.state.loadcomp ? (
       <LoadComp />
@@ -407,9 +422,18 @@ export default class UpdateProfile extends Component {
                                 opacity: "0.7",
                               }}
                             >
-                              {education.endorsed
-                                ? "Endorsed"
-                                : "Not Yet Endorsed"}
+                              {education.endorsed ? (
+                                "Endorsed"
+                              ) : (
+                                <div
+                                  className="endorsement-req-button"
+                                  onClick={() =>
+                                    this.reqEducationEndorsement(education)
+                                  }
+                                >
+                                  Request Endorsement
+                                </div>
+                              )}
                             </p>
                           </div>
                         </div>
@@ -469,7 +493,16 @@ export default class UpdateProfile extends Component {
                               opacity: "0.7",
                             }}
                           >
-                            {certi.endorsed ? "Endorsed" : "Not Yet Endorsed"}
+                            {certi.endorsed ? (
+                              "Endorsed"
+                            ) : (
+                              <div
+                                className="endorsement-req-button"
+                                onClick={() => this.reqCertiEndorsement(certi)}
+                              >
+                                Request Endorsement
+                              </div>
+                            )}
                           </p>
                         </div>
                         <div>
@@ -546,7 +579,18 @@ export default class UpdateProfile extends Component {
                               opacity: "0.7",
                             }}
                           >
-                            {workExp.endorsed ? "Endorsed" : "Not Yet Endorsed"}
+                            {workExp.endorsed ? (
+                              "Endorsed"
+                            ) : (
+                              <div
+                                className="endorsement-req-button"
+                                onClick={() =>
+                                  this.reqWorkexpEndorsement(workExp)
+                                }
+                              >
+                                Request Endorsement
+                              </div>
+                            )}
                           </p>
                         </div>
                       </div>

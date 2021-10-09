@@ -1,7 +1,7 @@
 import _ from "lodash";
 import React, { Component } from "react";
 import { toast } from "react-toastify";
-import { Search, Grid, Header, Segment } from "semantic-ui-react";
+import { Search, Grid, Header, Segment, Dropdown } from "semantic-ui-react";
 import Skills from "../abis/Skills.json";
 import SearchEmp from "./SearchEmp";
 import "./Search.css";
@@ -69,24 +69,34 @@ export default class SearchBar extends Component {
     }, 300);
   };
 
+  searchOptions = [
+    { key: "1", text: "Employee", value: "1" },
+    {
+      key: "2",
+      text: "Skill",
+      value: "2",
+    },
+  ];
   render() {
     const { isLoading, value, results } = this.state;
     return (
-      <Search
-        fluid
-        aligned="center"
-        loading={isLoading}
-        onResultSelect={this.handleResultSelect}
-        onSearchChange={_.debounce(this.handleSearchChange, 500, {
-          leading: true,
-        })}
-        results={results}
-        value={value}
-        style={{
-          minWidth: "300px",
-        }}
-        className="searchbar"
-      />
+      <>
+        <Search
+          fluid
+          aligned="center"
+          loading={isLoading}
+          onResultSelect={this.handleResultSelect}
+          onSearchChange={_.debounce(this.handleSearchChange, 500, {
+            leading: true,
+          })}
+          results={results}
+          value={value}
+          style={{
+            minWidth: "300px",
+          }}
+          className="searchbar"
+        />
+      </>
     );
   }
 }

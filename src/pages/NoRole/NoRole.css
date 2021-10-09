@@ -1,22 +1,17 @@
-.create-user {
-  position: fixed;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  -webkit-transform: translate(-50%, -50%);
-  -moz-transform: translate(-50%, -50%);
-  -o-transform: translate(-50%, -50%);
-  -ms-transform: translate(-50%, -50%);
+.norole {
+  text-align: center;
   margin-top: 40px;
 }
 
-.card-style {
+.norole > .card-style {
   background: #1e2022ea !important;
   border-radius: 7px !important;
   color: #c5c6c7 !important;
   min-width: 360px;
   border: 1px solid white !important;
   box-shadow: 0px 0px 2px 0px white !important;
+  margin-left: auto !important;
+  margin-right: auto !important;
 }
 
 .card-heading {
@@ -28,12 +23,19 @@
   text-align: center;
 }
 
+.norole-heading-subtext {
+  color: #c5c6c7;
+  font-size: 12px;
+  font-weight: 500;
+}
+
 .horizontal-line {
   border: none;
   border-top: 2px solid white;
 }
 
-.form-inputs-admin > input {
+.form-inputs-admin > input,
+.form-inputs-admin > textarea {
   border-radius: 7px !important;
   background: #1e2022ea !important;
   border: 1px solid white !important;
@@ -41,7 +43,8 @@
   color: white !important;
 }
 
-.form-inputs-admin > input::placeholder {
+.form-inputs-admin > input::placeholder,
+.form-inputs-admin > textarea::placeholder {
   color: white !important;
   opacity: 0.7;
 }
@@ -106,50 +109,4 @@
 .button-css-admin:hover {
   background: white !important;
   color: #1e2022ea !important;
-}
-
-.sidechat-container {
-  margin-top: 2rem;
-  margin-left: 1rem;
-}
-
-.notifications {
-  background: rgba(31, 30, 30, 0.581);
-  width: 85%;
-  margin-left: auto;
-  margin-right: auto;
-  height: 80vh;
-  margin-top: 40px;
-  border-radius: 10px;
-  border: 1px solid white;
-  box-shadow: inset 0 0 3px 0 white;
-}
-
-.sidechat-body {
-  overflow: auto !important;
-}
-
-.notification-sidechat {
-  color: white !important;
-}
-
-.notification-sidechat-subheading {
-  color: #c5c6c7 !important;
-}
-
-.header-row > th {
-  border-bottom: 1px solid white !important;
-}
-
-.row-cell-container {
-  cursor: pointer;
-}
-
-.header-row-cell {
-  border-bottom: 1px solid #c5c6c7 !important;
-}
-
-.row-cell-container :hover {
-  transform: scale(1.01, 1.01);
-  background: rgba(31, 30, 30, 0.1);
 }

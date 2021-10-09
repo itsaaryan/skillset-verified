@@ -12,7 +12,8 @@ class Navbar extends Component {
   state = { activeItem: "home", role: -1, account: "", showQr: false };
 
   componentDidMount = async () => {
-    const web3 = window.web3;
+    const web3 = await window.web3;
+    console.log(web3);
     const accounts = await web3.eth.getAccounts();
     if (accounts) {
       this.setState({ account: accounts[0] });
@@ -122,6 +123,13 @@ class Navbar extends Component {
                   active={activeItem === "Create User"}
                   onClick={this.handleItemClick}
                 />
+                <Menu.Item
+                  as={Link}
+                  to="/notifications"
+                  name="Notifications"
+                  active={activeItem === "Notifications"}
+                  onClick={this.handleItemClick}
+                />
               </>
             )}
             {this.state.role === 1 && (
@@ -138,6 +146,13 @@ class Navbar extends Component {
                   to="/update-profile"
                   name="Update Profile"
                   active={activeItem === "Update Profile"}
+                  onClick={this.handleItemClick}
+                />
+                <Menu.Item
+                  as={Link}
+                  to="/notifications"
+                  name="Notifications"
+                  active={activeItem === "Notifications"}
                   onClick={this.handleItemClick}
                 />
               </>
@@ -166,6 +181,13 @@ class Navbar extends Component {
                   active={activeItem === "Endorse Section"}
                   onClick={this.handleItemClick}
                 />
+                <Menu.Item
+                  as={Link}
+                  to="/notifications"
+                  name="Notifications"
+                  active={activeItem === "Notifications"}
+                  onClick={this.handleItemClick}
+                />
               </>
             )}
 
@@ -176,6 +198,13 @@ class Navbar extends Component {
                   to="/"
                   name="Request Admin For Role"
                   active={activeItem === "Request Admin For Role"}
+                  onClick={this.handleItemClick}
+                />
+                <Menu.Item
+                  as={Link}
+                  to="/notifications"
+                  name="Notifications"
+                  active={activeItem === "Notifications"}
                   onClick={this.handleItemClick}
                 />
               </>

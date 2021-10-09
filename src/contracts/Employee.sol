@@ -6,7 +6,7 @@ contract Employee {
   string description;
   string location;
   uint256[] public overallEndorsement;
-  uint256 public endorsecount;
+  uint256 endorsecount;
   string name;
 
   constructor(
@@ -304,7 +304,7 @@ contract Employee {
   }
 
   function deleteWorkExp(address org) public OnlyEmployee {
-    workexpmap[org].visible = !workexpmap[org].visible;
+    workexpmap[org].visible = false;
   }
 
   /********************************************************************Education Section********************************************************************/

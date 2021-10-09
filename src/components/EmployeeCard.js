@@ -18,7 +18,6 @@ class EmployeeCard extends Component {
   };
 
   componentDidMount = async () => {
-    this.setState({ loadcomp: true });
     const web3 = window.web3;
     const networkId = await web3.eth.net.getId();
     const EmployeeContract = await new web3.eth.Contract(
@@ -40,7 +39,7 @@ class EmployeeCard extends Component {
       overallEndorsement: employeedata[4],
       endorsecount: employeedata[5],
     };
-    this.setState({ employeedata: newEmployedata, loadcomp: false });
+    this.setState({ employeedata: newEmployedata });
   };
 
   getSkills = async (EmployeeContract) => {

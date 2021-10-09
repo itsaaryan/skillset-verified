@@ -13,6 +13,7 @@ export default class MetaMaskGuide extends Component {
           maxWidth: "800px",
           margin: "auto",
           marginTop: "100px",
+          color: "black",
         }}
       >
         <Image
