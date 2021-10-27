@@ -7,7 +7,7 @@ A blockchain-based skill verification system can help reduce the time spent on c
 - **Video Demo** - https://vimeo.com/629030779/cb18ff23a5
 - **Flowchart** - https://whimsical.com/frontend-PkzGdD585qXChFvYVDebCh
 - **Deployed URL** - https://kind-grass-06d9d2100.azurestaticapps.net/
-- **PPT Presentation** - https://docs.google.com/presentation/d/1U1F-nDCED4n_oAR-qisbrKJcXjEf3vF4/edit?usp=sharing&ouid=107672559157269951546&rtpof=true&sd=true
+- **PPT Presentation** - 
 
 ### Use cases
 
